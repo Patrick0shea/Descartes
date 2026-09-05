@@ -1,0 +1,20 @@
+=== Test-set state-prediction metrics (physical units, all 8 dims) ===
+MSE overall: 5.399220e-07
+MAE overall: 3.312855e-04
+Max error overall: 3.601069e-02
+
+=== Momentum-conservation analysis (test set, N=15000) ===
+delta_Px: mean|.|=2.480927e-08  max|.|=1.795685e-07  std=3.399347e-08
+delta_Py: mean|.|=2.513501e-08  max|.|=1.957608e-07  std=3.472672e-08
+magnitude sqrt(dPx^2+dPy^2): mean=4.032023e-08  max=1.967469e-07  std=2.712683e-08
+
+Percentage of test examples within tolerance:
+  tol=1e-03:  Px within: 100.00%   Py within: 100.00%   magnitude within: 100.00%
+  tol=1e-04:  Px within: 100.00%   Py within: 100.00%   magnitude within: 100.00%
+  tol=1e-05:  Px within: 100.00%   Py within: 100.00%   magnitude within: 100.00%
+
+=== Multi-step rollout (200 steps, dt=0.05) from state0=[-0.5, 0.0, 0.4, 0.1, 0.5, 0.0, 0.1, -0.2] ===
+True initial momentum: Px0=0.500000, Py0=-0.100000
+Final |momentum drift| geometric NN rollout: dPx=2.235174e-07, dPy=8.940697e-09
+Max |momentum drift| over rollout, geometric NN: dPx=2.235174e-07, dPy=3.874302e-08
+Max |momentum drift| over rollout, true simulator: dPx=1.110e-16, dPy=5.551e-17

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "geometric_momentum_x_conserved_loose",
+    "description": "|Px_next - Px| <= 1.0 for all states in D",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "geometric_momentum_y_conserved_loose",
+    "description": "|Py_next - Py| <= 1.0 for all states in D",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "geometric_momentum_x_conserved_same_as_baseline_tight",
+    "description": "|Px_next - Px| <= 1e-4 for all states in D (baseline was SAT here)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "geometric_momentum_y_conserved_same_as_baseline_tight",
+    "description": "|Py_next - Py| <= 1e-4 for all states in D (baseline was SAT here)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "geometric_momentum_x_conserved_ultra_tight",
+    "description": "|Px_next - Px| <= 1e-5 for all states in D (tighter than the baseline could ever verify)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "geometric_momentum_y_conserved_ultra_tight",
+    "description": "|Py_next - Py| <= 1e-5 for all states in D (tighter than the baseline could ever verify)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  }
+]

@@ -129,3 +129,45 @@ MOMENTUM_PROPERTIES = [
         axis="y", epsilon=1e-4, expect="SAT",
     ),
 ]
+
+# Step 5: the same properties, same domain D, run against the geometric
+# (momentum-conserving-by-construction) surrogate instead of the plain
+# MLP baseline. Includes the SAME epsilon=1e-4 the baseline was SAT on
+# (direct contrast: expected UNSAT here) plus an even tighter epsilon
+# than the baseline could ever be verified at, to demonstrate the
+# structural guarantee rather than just a better-trained approximation.
+# An untrained ParticleGeometricMLP was measured to conserve momentum to
+# ~5e-7 (float32 rounding of an exact algebraic identity, independent of
+# weights) -- epsilon=1e-5 stays safely above that noise floor.
+GEOMETRIC_MOMENTUM_PROPERTIES = [
+    MomentumProperty(
+        name="geometric_momentum_x_conserved_loose",
+        description="|Px_next - Px| <= 1.0 for all states in D",
+        axis="x", epsilon=1.0, expect="UNSAT",
+    ),
+    MomentumProperty(
+        name="geometric_momentum_y_conserved_loose",
+        description="|Py_next - Py| <= 1.0 for all states in D",
+        axis="y", epsilon=1.0, expect="UNSAT",
+    ),
+    MomentumProperty(
+        name="geometric_momentum_x_conserved_same_as_baseline_tight",
+        description="|Px_next - Px| <= 1e-4 for all states in D (baseline was SAT here)",
+        axis="x", epsilon=1e-4, expect="UNSAT",
+    ),
+    MomentumProperty(
+        name="geometric_momentum_y_conserved_same_as_baseline_tight",
+        description="|Py_next - Py| <= 1e-4 for all states in D (baseline was SAT here)",
+        axis="y", epsilon=1e-4, expect="UNSAT",
+    ),
+    MomentumProperty(
+        name="geometric_momentum_x_conserved_ultra_tight",
+        description="|Px_next - Px| <= 1e-5 for all states in D (tighter than the baseline could ever verify)",
+        axis="x", epsilon=1e-5, expect="UNSAT",
+    ),
+    MomentumProperty(
+        name="geometric_momentum_y_conserved_ultra_tight",
+        description="|Py_next - Py| <= 1e-5 for all states in D (tighter than the baseline could ever verify)",
+        axis="y", epsilon=1e-5, expect="UNSAT",
+    ),
+]

@@ -1,0 +1,272 @@
+[
+  {
+    "name": "geometric_momentum_x_conserved_loose",
+    "description": "|Px_next - Px| <= 1.0 for all states in D",
+    "axis": "x",
+    "epsilon": 1.0,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.014316797256469727,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.010767459869384766,
+      "marabou_time_seconds": 0.009447,
+      "counterexample": null
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.003549337387084961,
+      "marabou_time_seconds": 0.002857,
+      "counterexample": null
+    },
+    "counterexample": null
+  },
+  {
+    "name": "geometric_momentum_y_conserved_loose",
+    "description": "|Py_next - Py| <= 1.0 for all states in D",
+    "axis": "y",
+    "epsilon": 1.0,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.00506281852722168,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.0025510787963867188,
+      "marabou_time_seconds": 0.001989,
+      "counterexample": null
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.002511739730834961,
+      "marabou_time_seconds": 0.001912,
+      "counterexample": null
+    },
+    "counterexample": null
+  },
+  {
+    "name": "geometric_momentum_x_conserved_same_as_baseline_tight",
+    "description": "|Px_next - Px| <= 1e-4 for all states in D (baseline was SAT here)",
+    "axis": "x",
+    "epsilon": 0.0001,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.005173206329345703,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.0026466846466064453,
+      "marabou_time_seconds": 0.001997,
+      "counterexample": null
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.002526521682739258,
+      "marabou_time_seconds": 0.001922,
+      "counterexample": null
+    },
+    "counterexample": null
+  },
+  {
+    "name": "geometric_momentum_y_conserved_same_as_baseline_tight",
+    "description": "|Py_next - Py| <= 1e-4 for all states in D (baseline was SAT here)",
+    "axis": "y",
+    "epsilon": 0.0001,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.0049746036529541016,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.0025420188903808594,
+      "marabou_time_seconds": 0.00191,
+      "counterexample": null
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.002432584762573242,
+      "marabou_time_seconds": 0.001916,
+      "counterexample": null
+    },
+    "counterexample": null
+  },
+  {
+    "name": "geometric_momentum_x_conserved_ultra_tight",
+    "description": "|Px_next - Px| <= 1e-5 for all states in D (tighter than the baseline could ever verify)",
+    "axis": "x",
+    "epsilon": 1e-05,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.004987239837646484,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.0024347305297851562,
+      "marabou_time_seconds": 0.001921,
+      "counterexample": null
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.002552509307861328,
+      "marabou_time_seconds": 0.0019,
+      "counterexample": null
+    },
+    "counterexample": null
+  },
+  {
+    "name": "geometric_momentum_y_conserved_ultra_tight",
+    "description": "|Py_next - Py| <= 1e-5 for all states in D (tighter than the baseline could ever verify)",
+    "axis": "y",
+    "epsilon": 1e-05,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.004929542541503906,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.002539396286010742,
+      "marabou_time_seconds": 0.002022,
+      "counterexample": null
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.002390146255493164,
+      "marabou_time_seconds": 0.001902,
+      "counterexample": null
+    },
+    "counterexample": null
+  }
+]

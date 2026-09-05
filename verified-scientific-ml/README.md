@@ -691,3 +691,163 @@ it against this plain MLP baseline (Model A) on:
 
 This step deliberately stops short of building that geometric model —
 Step 4's job was only to prove the benchmark and pipeline work.
+
+## Step 5: geometric surrogate and the standard-vs-geometric comparison
+
+Step 5 builds Model B — the geometric surrogate Step 4 deferred — and
+runs the identical Marabou pipeline on it, so its verification results
+are directly comparable to Step 4's plain MLP baseline (Model A) on the
+same domain D and the same momentum properties.
+
+### The geometric model
+
+`models/particle_geometric.py` (`ParticleGeometricMLP`) predicts the same
+one-step map as the baseline, but with two physical structures built into
+the architecture instead of left for training to approximate:
+
+1. **Translation invariance of the interaction.** The only learned part
+   of the model, a small `force_net` (4 → 16 → 16 → 2), sees just the
+   *relative* position `(rx, ry) = (x2-x1, y2-y1)` and *relative*
+   velocity `(dvx, dvy) = (vx2-vx1, vy2-vy1)` — never absolute
+   coordinates. This mirrors the true physics exactly: the spring force
+   in `simulator/two_particle_system.py` depends only on the separation
+   vector.
+2. **Newton's third law.** `force_net` outputs one shared vector
+   `F = (Fx, Fy)`, applied as **+F** to particle 1's velocity and **−F**
+   to particle 2's. For equal masses this makes
+
+   ```
+   Px_next - Px = (vx1+Fx) + (vx2-Fx) - (vx1+vx2) = 0
+   ```
+
+   an **exact algebraic identity of the architecture** — true for every
+   possible weight in `force_net`, not something training merely has to
+   approximate. Positions are updated with the exact kinematic relation
+   `dx/dt = v` (an average-velocity step over the fixed, known `dt`), since
+   that part of the ODE needs no learning at all.
+
+The "extract relative state" and "combine state + force into next state"
+steps are both linear, so they are implemented as fixed
+(`requires_grad=False`) `Linear` layers rather than tensor indexing —
+Marabou's ONNX parser has no support for the `Gather` op that indexing
+traces to, only `Gemm`/`MatMul`/`Add`/`Sub`/`Concat`/`Relu`, so the whole
+forward pass is written using just those.
+
+No input/output normalization is used for this model (unlike the
+baseline): the network already operates in physical units end-to-end, and
+the relative-state features it sees are already well-scaled over this
+domain.
+
+### Training
+
+Same philosophy, same seed, same optimizer/loss/epoch budget as
+Step 4's baseline:
+
+```bash
+python -m models.train_geometric
+python -m models.evaluate_geometric
+```
+
+Saves `models/checkpoints/particle_geometric.pt` and
+`particle_geometric_loss_history.npz`, plus plots
+(`models/plots/geometric_*.png`) and
+`models/checkpoints/particle_geometric_evaluation_report.txt` — the exact
+same set of outputs Step 4 produces for the baseline.
+
+### Results: Model A (plain MLP) vs. Model B (geometric)
+
+**Test-set state prediction** (15,000 held-out transitions, physical units):
+
+| metric | Model A (MLP) | Model B (geometric) |
+|---|---|---|
+| MSE | 7.482e-05 | **5.399e-07** |
+| MAE | 5.664e-03 | **3.313e-04** |
+| Max error | 6.889e-02 | 3.601e-02 |
+
+**Test-set momentum error** (`|P_next − P|`, physical units):
+
+| metric | Model A (MLP) | Model B (geometric) |
+|---|---|---|
+| mean \|ΔPx\| | 1.399e-03 | **2.481e-08** |
+| mean \|ΔPy\| | 9.835e-04 | **2.514e-08** |
+| max \|ΔPx\| | 3.477e-02 | **1.796e-07** |
+| max \|ΔPy\| | 2.116e-02 | **1.958e-07** |
+| % within 1e-3 (Px / Py) | 39.16% / 58.59% | **100.00% / 100.00%** |
+| % within 1e-4 (Px / Py) | 3.38% / 6.17% | **100.00% / 100.00%** |
+| % within 1e-5 (Px / Py) | 0.31% / 0.67% | **100.00% / 100.00%** |
+
+Model B's momentum error sits at the float32 rounding floor (~1e-7) of an
+exact identity — *any* untrained `ParticleGeometricMLP` measures the
+same, since it holds independent of the learned weights (see
+`tests/test_particle_geometric.py::test_geometric_model_conserves_momentum_exactly_regardless_of_weights`).
+
+**200-step autoregressive rollout** from the same initial state
+`(x1,y1,vx1,vy1,x2,y2,vx2,vy2) = (-0.5,0,0.4,0.1,0.5,0,0.1,-0.2)`
+(`Px0=0.5, Py0=-0.1`), `dt=0.05`:
+
+| metric | Model A (MLP) | Model B (geometric) |
+|---|---|---|
+| Final \|momentum drift\| (dPx, dPy) | (3.002e-01, 6.481e-02) | **(2.235e-07, 8.941e-09)** |
+
+The plain MLP's rollout momentum visibly wanders (up to ~60% of the true
+`Py0` magnitude); the geometric model's stays flat at machine precision —
+see `models/plots/particle_momentum_drift.png` vs.
+`models/plots/geometric_momentum_drift.png`.
+
+**Formal verification** (same domain D, same `verify_momentum_property`
+pipeline, `verification/verify_geometric.py`):
+
+| property | Model A (MLP) | Model B (geometric) |
+|---|---|---|
+| ε=1.0 (loose) | UNSAT, 5.7s avg | UNSAT, **0.01s avg** |
+| ε=1e-4 | **SAT** (counterexample, momentum error ≈0.057–0.068) | **UNSAT** |
+| ε=1e-5 | *(not attempted — already SAT at 1e-4)* | **UNSAT** |
+
+The central result: at the identical tolerance (ε=1e-4) where Marabou
+proves a genuine counterexample exists for the MLP baseline, it proves
+**none exists anywhere in D** for the geometric model — and does so
+roughly 500× faster than even the MLP's easy loose-bound UNSAT query.
+This is not a training artifact; it follows from the architecture's exact
+momentum identity, which Marabou's linear arithmetic can resolve almost
+immediately without any case-splitting.
+
+**Random testing over the same domain** (`verification/random_search_geometric.py`,
+200,000 samples, seed 42) is consistent with every formal result above:
+0 violations found for the geometric model at all three epsilons
+(including 1e-4 and 1e-5, where it could never *prove* their absence),
+versus 193,456/200,000 and 189,227/200,000 samples violating ε=1e-4 for
+the MLP baseline (Px, Py respectively) — testing stumbles onto violations
+easily when they're common, and (as in Step 4) can never be read as a
+proof when it finds none.
+
+### What this does and does not establish
+
+**Established:** for this exact trained `ParticleGeometricMLP` checkpoint,
+over the exact same domain D verified in Step 4, momentum is conserved to
+within 1e-5 for *every* state in D — a claim the plain MLP provably
+cannot make at that tolerance (a real counterexample was found and
+saved). This is the thesis's first direct, formally-verified evidence
+that a geometric inductive bias improves verifiability, not just
+empirical accuracy, on identical terms (same domain, same property, same
+verifier).
+
+**Not established:** this says nothing about a harder geometric property
+(e.g. energy conservation, still deferred) or about full O(2) rotational
+equivariance (the model is translation-invariant but was not built or
+verified to be rotation-equivariant); nothing about either model's
+behavior outside D; and this is one architecture on one system —
+generalizing "geometric bias improves verifiability" beyond this
+benchmark would need more systems and more geometric model families.
+
+### Run tests
+
+```bash
+pytest
+```
+
+`tests/test_particle_geometric.py` checks the model's output shape, that
+momentum conservation and translation invariance hold for *random,
+untrained* weights (proving they are structural, not learned), that
+training reduces loss, ONNX export equivalence, and — end to end — that
+the real trained model verifies UNSAT at ε=1e-4, the exact tolerance the
+baseline was SAT on.
