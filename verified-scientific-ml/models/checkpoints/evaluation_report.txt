@@ -1,0 +1,12 @@
+=== Test-set metrics (physical units) ===
+MSE  x_next: 1.316763e-07   v_next: 2.201486e-07   overall: 1.759125e-07
+MAE  x_next: 2.703896e-04   v_next: 3.603972e-04   overall: 3.153934e-04
+Max error x_next: 3.496729e-03   v_next: 3.817456e-03   overall: 3.817456e-03
+
+=== Multi-step rollout (200 steps, dt=0.05) from x0=1.5, v0=0.0 ===
+Final position error |x_nn - x_true|: 1.331674e-02
+Max position error over rollout: 3.269840e-02
+
+=== Energy drift over rollout ===
+True simulator energy drift (E_final - E_initial): -7.028317e-08
+NN rollout energy drift (E_final - E_initial): 8.885874e-03
