@@ -1,0 +1,60 @@
+[
+  {
+    "name": "momentum_x_conserved_loose",
+    "description": "|Px_next - Px| <= 1.0 for all states in D",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "momentum_y_conserved_loose",
+    "description": "|Py_next - Py| <= 1.0 for all states in D",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "momentum_x_conserved_tight",
+    "description": "|Px_next - Px| <= 1e-4 for all states in D (deliberately too tight)",
+    "n_samples": 200000,
+    "n_violations_found": 193456,
+    "result": "VIOLATION_FOUND",
+    "example_violation": {
+      "input_state": [
+        -0.08216845244169235,
+        0.1374823898077011,
+        -0.7204059958457947,
+        -0.770939826965332,
+        0.808334231376648,
+        -0.138738214969635,
+        0.13047221302986145,
+        0.529997706413269
+      ],
+      "momentum_before": -0.5899337530136108,
+      "momentum_after": -0.5919836163520813,
+      "momentum_error": -0.002049863338470459
+    }
+  },
+  {
+    "name": "momentum_y_conserved_tight",
+    "description": "|Py_next - Py| <= 1e-4 for all states in D (deliberately too tight)",
+    "n_samples": 200000,
+    "n_violations_found": 189227,
+    "result": "VIOLATION_FOUND",
+    "example_violation": {
+      "input_state": [
+        0.10916957259178162,
+        -0.8723654747009277,
+        0.6552623510360718,
+        0.26332879066467285,
+        1.2388211488723755,
+        -0.6982753276824951,
+        0.9413960576057434,
+        0.7862422466278076
+      ],
+      "momentum_before": 1.0495710372924805,
+      "momentum_after": 1.050656795501709,
+      "momentum_error": 0.0010857582092285156
+    }
+  }
+]

@@ -1,0 +1,326 @@
+[
+  {
+    "name": "momentum_x_conserved_loose",
+    "description": "|Px_next - Px| <= 1.0 for all states in D",
+    "axis": "x",
+    "epsilon": 1.0,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 6.320115327835083,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "UNSAT",
+      "verification_time_seconds": 2.7774064540863037,
+      "marabou_time_seconds": 2.77661,
+      "counterexample": null
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "UNSAT",
+      "verification_time_seconds": 3.5427088737487793,
+      "marabou_time_seconds": 3.542109,
+      "counterexample": null
+    },
+    "counterexample": null
+  },
+  {
+    "name": "momentum_y_conserved_loose",
+    "description": "|Py_next - Py| <= 1.0 for all states in D",
+    "axis": "y",
+    "epsilon": 1.0,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 5.148578405380249,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "UNSAT",
+      "verification_time_seconds": 2.971092700958252,
+      "marabou_time_seconds": 2.970377,
+      "counterexample": null
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "UNSAT",
+      "verification_time_seconds": 2.177485704421997,
+      "marabou_time_seconds": 2.176819,
+      "counterexample": null
+    },
+    "counterexample": null
+  },
+  {
+    "name": "momentum_x_conserved_tight",
+    "description": "|Px_next - Px| <= 1e-4 for all states in D (deliberately too tight)",
+    "axis": "x",
+    "epsilon": 0.0001,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "SAT",
+    "result": "SAT",
+    "verification_time_seconds": 0.01069021224975586,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "SAT",
+      "verification_time_seconds": 0.005375862121582031,
+      "marabou_time_seconds": 0.004632,
+      "counterexample": {
+        "input_state": [
+          1.0,
+          -1.0,
+          -0.3592209199727099,
+          -1.0,
+          2.4,
+          -1.5719915710858836,
+          -1.0,
+          0.16447453419167735
+        ],
+        "predicted_next_state": [
+          0.9540578650726061,
+          -1.048714084208963,
+          -0.3000044151732327,
+          -0.966066483637404,
+          2.1705566154406037,
+          -1.6133552098720583,
+          -0.9915107403434329,
+          0.18746254762016998
+        ],
+        "momentum_before": -1.3592209199727099,
+        "momentum_after": -1.2915151555166655,
+        "momentum_error": 0.06770576445604437
+      }
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "SAT",
+      "verification_time_seconds": 0.005314350128173828,
+      "marabou_time_seconds": 0.004588,
+      "counterexample": {
+        "input_state": [
+          -1.0,
+          0.365664858333926,
+          1.0,
+          -0.7393386503702223,
+          0.4000000000000632,
+          -1.034335141666074,
+          -0.24245844014557066,
+          0.21866358448854337
+        ],
+        "predicted_next_state": [
+          -0.8973315971850857,
+          0.37340898754239565,
+          0.9909737544135042,
+          -0.7174933831374899,
+          0.3770186228216821,
+          -0.8904564634286004,
+          -0.27239210288921234,
+          0.24159242228530453
+        ],
+        "momentum_before": 0.7575415598544293,
+        "momentum_after": 0.7185816515242919,
+        "momentum_error": -0.038959908330137405
+      }
+    },
+    "counterexample": {
+      "input_state": [
+        1.0,
+        -1.0,
+        -0.3592209199727099,
+        -1.0,
+        2.4,
+        -1.5719915710858836,
+        -1.0,
+        0.16447453419167735
+      ],
+      "predicted_next_state": [
+        0.9540578650726061,
+        -1.048714084208963,
+        -0.3000044151732327,
+        -0.966066483637404,
+        2.1705566154406037,
+        -1.6133552098720583,
+        -0.9915107403434329,
+        0.18746254762016998
+      ],
+      "momentum_before": -1.3592209199727099,
+      "momentum_after": -1.2915151555166655,
+      "momentum_error": 0.06770576445604437
+    }
+  },
+  {
+    "name": "momentum_y_conserved_tight",
+    "description": "|Py_next - Py| <= 1e-4 for all states in D (deliberately too tight)",
+    "axis": "y",
+    "epsilon": 0.0001,
+    "domain_lower": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -2.4,
+      -2.4,
+      -1.0,
+      -1.0
+    ],
+    "domain_upper": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.4,
+      2.4,
+      1.0,
+      1.0
+    ],
+    "separation_bound": 1.4,
+    "expected": "SAT",
+    "result": "SAT",
+    "verification_time_seconds": 0.011040925979614258,
+    "upper_violation_query": {
+      "direction": "upper",
+      "result": "SAT",
+      "verification_time_seconds": 0.005664348602294922,
+      "marabou_time_seconds": 0.004903,
+      "counterexample": {
+        "input_state": [
+          1.0,
+          -1.0,
+          -0.3592209199727099,
+          -1.0,
+          2.4,
+          -1.5719915710858836,
+          -1.0,
+          0.16447453419167735
+        ],
+        "predicted_next_state": [
+          0.9540578650726061,
+          -1.048714084208963,
+          -0.3000044151732327,
+          -0.966066483637404,
+          2.1705566154406037,
+          -1.6133552098720583,
+          -0.9915107403434329,
+          0.18746254762016998
+        ],
+        "momentum_before": -0.8355254658083227,
+        "momentum_after": -0.778603936017234,
+        "momentum_error": 0.056921529791088665
+      }
+    },
+    "lower_violation_query": {
+      "direction": "lower",
+      "result": "SAT",
+      "verification_time_seconds": 0.005376577377319336,
+      "marabou_time_seconds": 0.004665,
+      "counterexample": {
+        "input_state": [
+          -0.4485873731920949,
+          -0.018727029233512802,
+          -1.0,
+          0.3335426308935733,
+          -1.171850270908553,
+          -1.4187270292335128,
+          -1.0,
+          0.5351229956621485
+        ],
+        "predicted_next_state": [
+          -0.4954467069542984,
+          -0.010152050787148204,
+          -1.0092961479771796,
+          0.3122857239127783,
+          -1.2230283632038612,
+          -1.3936131730610732,
+          -0.9907666110445194,
+          0.5562799026429408
+        ],
+        "momentum_before": 0.8686656265557218,
+        "momentum_after": 0.8685656265557191,
+        "momentum_error": -0.00010000000000265352
+      }
+    },
+    "counterexample": {
+      "input_state": [
+        1.0,
+        -1.0,
+        -0.3592209199727099,
+        -1.0,
+        2.4,
+        -1.5719915710858836,
+        -1.0,
+        0.16447453419167735
+      ],
+      "predicted_next_state": [
+        0.9540578650726061,
+        -1.048714084208963,
+        -0.3000044151732327,
+        -0.966066483637404,
+        2.1705566154406037,
+        -1.6133552098720583,
+        -0.9915107403434329,
+        0.18746254762016998
+      ],
+      "momentum_before": -0.8355254658083227,
+      "momentum_after": -0.778603936017234,
+      "momentum_error": 0.056921529791088665
+    }
+  }
+]
