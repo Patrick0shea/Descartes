@@ -210,3 +210,205 @@ pytest
 
 `tests/test_surrogate.py` adds shape and normalization round-trip checks
 for the model code (in addition to the Step 1 simulator tests).
+
+## Step 3: formal verification (Marabou)
+
+Step 3 takes the trained Step 2 MLP and asks a fundamentally different
+kind of question about it than testing does:
+
+- **Testing**: "we tried many inputs and didn't find a violation."
+- **Formal verification**: "within the specified input domain, there
+  does not exist an input that violates the specified property."
+
+This does not modify the Step 1 simulator or the Step 2 model — it only
+exports the already-trained network and checks properties of it.
+
+### What is being verified
+
+The verifier is [Marabou](https://github.com/NeuralNetworkVerification/Marabou),
+an SMT-based complete verifier for piecewise-linear (ReLU) networks. It is
+given the network as an ONNX graph plus a set of linear input/output
+bounds, and it either:
+
+- proves **no input in the domain violates the property** (**UNSAT** —
+  the negated property is unsatisfiable), or
+- returns a **concrete counterexample input** that does violate it
+  (**SAT** — the negated property is satisfiable).
+
+**Exact mathematical domain**, identical for every property:
+
+```
+x in [-2, 2]
+v in [-2, 2]
+```
+
+This is exactly the domain `data/generate_data.py` sampled initial
+conditions from in Step 1, so it is the region the network was actually
+trained on, not an arbitrary or wider region.
+
+**Properties checked** (`verification/properties.py`), each of the form
+"for all (x, v) in the domain, `<output> <bound_type> <value>`":
+
+| name | claim | expected |
+|---|---|---|
+| `x_next_upper_loose` | `x_next <= 3.0` | UNSAT (verified) |
+| `x_next_lower_loose` | `x_next >= -3.0` | UNSAT (verified) |
+| `v_next_upper_loose` | `v_next <= 3.0` | UNSAT (verified) |
+| `v_next_lower_loose` | `v_next >= -3.0` | UNSAT (verified) |
+| `x_next_upper_violated` | `x_next <= 1.0` | SAT (deliberately false) |
+| `v_next_lower_violated` | `v_next >= -1.0` | SAT (deliberately false) |
+
+The "loose" bounds come from the physics: energy conservation bounds the
+true amplitude to `sqrt(2 * E_max) = sqrt(2 * 0.5 * (2^2 + 2^2)) = sqrt(8)
+≈ 2.83` for the true simulator, and Step 2's evaluation showed the
+network's single-step error is at most ~4e-3 on this domain — so 3.0
+leaves comfortable margin. The two "violated" properties use bounds that
+are deliberately too tight (e.g. `x=2, v=0` alone already pushes `x_next`
+close to 2), included specifically to demonstrate that Marabou *can* find
+a real counterexample, not just report UNSAT every time.
+
+Marabou works with non-strict inequalities, so in practice each property
+is checked by asking Marabou to solve the **negation**:
+
+- claim `output <= U` -> search for `output >= U`
+- claim `output >= L` -> search for `output <= L`
+
+UNSAT on that negated query proves the original claim across the whole
+domain; SAT returns an input satisfying the negation, i.e. a
+counterexample to the claim.
+
+### What SAT and UNSAT mean here
+
+- **UNSAT**: Marabou has searched the entire (continuous, infinite)
+  input domain and proven no point in it violates the property. This is
+  a formal proof, not a sample-based estimate.
+- **SAT**: Marabou found one specific input in the domain, returned as a
+  counterexample, where the property does not hold.
+
+### Why this is different from random testing
+
+`verification/random_search.py` runs the identical properties over
+200,000 random `(x, v)` samples drawn from the same domain (seed 42) and
+checks each one against the model directly (no solver). Run:
+
+```bash
+python -m verification.random_search
+```
+
+Results from this run (`verification/artifacts/random_testing_results.json`):
+
+| property | Marabou (exhaustive) | random testing (200,000 samples) |
+|---|---|---|
+| `x_next_upper_loose` | **UNSAT** — proven, no counterexample exists | 0/200,000 violated — "not found," never proof |
+| `x_next_lower_loose` | **UNSAT** — proven | 0/200,000 violated |
+| `v_next_upper_loose` | **UNSAT** — proven | 0/200,000 violated |
+| `v_next_lower_loose` | **UNSAT** — proven | 0/200,000 violated |
+| `x_next_upper_violated` | **SAT** — counterexample found | 49,960/200,000 violated |
+| `v_next_lower_violated` | **SAT** — counterexample found | 50,061/200,000 violated |
+
+For the two deliberately-violated properties, both methods agree a
+violation exists (random testing finds it easily because the false bound
+is violated over roughly a quarter of the domain, not just an edge case).
+The important contrast is on the four "loose" properties: random testing
+can only ever say *no violation was found in this sample*, which is
+consistent with the property being true but is **not proof** — a
+violation could in principle exist in one of the uncountably many points
+never sampled. Marabou's UNSAT result is what actually rules that out,
+by construction (it performs a complete search using SMT + LP bound
+tightening over the piecewise-linear network, not sampling).
+
+### Exporting the model (ONNX)
+
+```bash
+python -m verification.export_onnx
+```
+
+The trained `models/checkpoints/surrogate.pt` + `normalizer.npz` are
+loaded and wrapped as `FullSurrogate`
+(`verification/export_onnx.py`), which fuses input normalization and
+output de-normalization into the network itself as extra `Linear`
+layers with diagonal weight matrices. This means the exported ONNX
+graph (`verification/artifacts/surrogate.onnx`) takes a **physical**
+`[x, v]` state as input and produces a **physical** `[x_next, v_next]`
+state as output — so the domain and properties above can be stated
+directly in physical units instead of normalized ones. Before exporting,
+the script checks the fused model's output against
+`models.evaluate.predict()` (the original inference path) over random
+samples and asserts the max difference is below `1e-4` (observed:
+`~5e-7`, i.e. floating-point-level agreement) — confirming the export
+preserves inference behavior.
+
+### Running the verifier
+
+```bash
+python -m verification.verify
+```
+
+For every property this records input bounds, the property, the
+SAT/UNSAT result, the counterexample (if SAT), and verification time to
+`verification/artifacts/verification_results.json`.
+
+### Results (this run)
+
+All 6 properties matched their expected result:
+
+| property | result | time (s) | counterexample |
+|---|---|---|---|
+| `x_next_upper_loose` | UNSAT | 0.097 | — |
+| `x_next_lower_loose` | UNSAT | 0.067 | — |
+| `v_next_upper_loose` | UNSAT | 0.089 | — |
+| `v_next_lower_loose` | UNSAT | 0.118 | — |
+| `x_next_upper_violated` | **SAT** | 0.042 | x=1.040201, v=0.232774 -> x_next=1.050022 |
+| `v_next_lower_violated` | **SAT** | 0.040 | x=0.395056, v=-0.981592 -> v_next=-1.000000 |
+
+### What has and has not been formally established
+
+**Established (proven, for exactly the stated domain):**
+- For every `(x, v)` with `x in [-2,2]` and `v in [-2,2]`, this specific
+  trained network satisfies `-3.0 <= x_next <= 3.0` and
+  `-3.0 <= v_next <= 3.0`. This is a complete proof over that domain, not
+  an empirical observation.
+
+**Not established:**
+- Nothing about behavior **outside** `[-2,2] x [-2,2]` — the network is
+  unconstrained there and these results say nothing about it.
+- Nothing about **energy conservation** — that is nonlinear
+  (`E = 0.5*v^2 + 0.5*k*x^2`) and out of scope for this linear-bounds
+  pipeline (explicitly deferred, see limitations).
+- Nothing about **rotational/phase-space equivariance** — also deferred.
+- Nothing about **multi-step rollout behavior** — only the one-step map
+  is verified; Step 2 already showed rollout error and energy drift
+  compound over many steps, and this verification says nothing about
+  that regime.
+- These results are specific to **this exact trained checkpoint**;
+  retraining the model (even with the same code) would require
+  re-verification.
+
+### Limitations
+
+- Only simple linear (box) input bounds and linear output bounds were
+  checked — no nonlinear properties (e.g. energy conservation) yet.
+- Marabou's inequalities are non-strict, so a SAT counterexample
+  technically satisfies `output >= U` (not strictly `> U`); the boundary
+  case `output == U` is measure-zero and not practically distinguishable
+  here.
+- The verified domain (`[-2,2] x [-2,2]`) is deliberately the same
+  domain the model was trained on; verifying a much larger domain (where
+  the network was never trained) was not attempted here and would likely
+  fail, since nothing constrains the network's behavior outside its
+  training distribution.
+- The "violated" properties were chosen by hand to be false, specifically
+  to demonstrate Marabou's SAT/counterexample path — they are a pipeline
+  sanity check, not a property anyone would expect to hold.
+
+### Run tests
+
+```bash
+pytest
+```
+
+`tests/test_verification.py` checks the ONNX export matches the original
+model's inference behavior, that a loose property returns UNSAT with no
+counterexample, that a deliberately violated property returns SAT with a
+counterexample that is independently confirmed against the real model,
+and that random search behaves consistently with both cases.

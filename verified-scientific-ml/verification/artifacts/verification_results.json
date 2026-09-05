@@ -1,0 +1,144 @@
+[
+  {
+    "name": "x_next_upper_loose",
+    "description": "x_next <= 3.0 for all (x, v) in the domain",
+    "input_domain": {
+      "x": [
+        -2.0,
+        2.0
+      ],
+      "v": [
+        -2.0,
+        2.0
+      ]
+    },
+    "output": "x_next",
+    "bound_type": "ub",
+    "bound_value": 3.0,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.09672403335571289,
+    "marabou_time_seconds": 0.093596,
+    "counterexample": null
+  },
+  {
+    "name": "x_next_lower_loose",
+    "description": "x_next >= -3.0 for all (x, v) in the domain",
+    "input_domain": {
+      "x": [
+        -2.0,
+        2.0
+      ],
+      "v": [
+        -2.0,
+        2.0
+      ]
+    },
+    "output": "x_next",
+    "bound_type": "lb",
+    "bound_value": -3.0,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.06666445732116699,
+    "marabou_time_seconds": 0.06377,
+    "counterexample": null
+  },
+  {
+    "name": "v_next_upper_loose",
+    "description": "v_next <= 3.0 for all (x, v) in the domain",
+    "input_domain": {
+      "x": [
+        -2.0,
+        2.0
+      ],
+      "v": [
+        -2.0,
+        2.0
+      ]
+    },
+    "output": "v_next",
+    "bound_type": "ub",
+    "bound_value": 3.0,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.08901548385620117,
+    "marabou_time_seconds": 0.086155,
+    "counterexample": null
+  },
+  {
+    "name": "v_next_lower_loose",
+    "description": "v_next >= -3.0 for all (x, v) in the domain",
+    "input_domain": {
+      "x": [
+        -2.0,
+        2.0
+      ],
+      "v": [
+        -2.0,
+        2.0
+      ]
+    },
+    "output": "v_next",
+    "bound_type": "lb",
+    "bound_value": -3.0,
+    "expected": "UNSAT",
+    "result": "UNSAT",
+    "verification_time_seconds": 0.11751317977905273,
+    "marabou_time_seconds": 0.114685,
+    "counterexample": null
+  },
+  {
+    "name": "x_next_upper_violated",
+    "description": "x_next <= 1.0 for all (x, v) in the domain (deliberately false)",
+    "input_domain": {
+      "x": [
+        -2.0,
+        2.0
+      ],
+      "v": [
+        -2.0,
+        2.0
+      ]
+    },
+    "output": "x_next",
+    "bound_type": "ub",
+    "bound_value": 1.0,
+    "expected": "SAT",
+    "result": "SAT",
+    "verification_time_seconds": 0.041933298110961914,
+    "marabou_time_seconds": 0.039017,
+    "counterexample": {
+      "x": 1.0402013786448703,
+      "v": 0.23277416785143348,
+      "x_next": 1.050022218950639,
+      "v_next": 0.17874653306178834
+    }
+  },
+  {
+    "name": "v_next_lower_violated",
+    "description": "v_next >= -1.0 for all (x, v) in the domain (deliberately false)",
+    "input_domain": {
+      "x": [
+        -2.0,
+        2.0
+      ],
+      "v": [
+        -2.0,
+        2.0
+      ]
+    },
+    "output": "v_next",
+    "bound_type": "lb",
+    "bound_value": -1.0,
+    "expected": "SAT",
+    "result": "SAT",
+    "verification_time_seconds": 0.039518117904663086,
+    "marabou_time_seconds": 0.036536,
+    "counterexample": {
+      "x": 0.3950563931126273,
+      "v": -0.9815920170953754,
+      "x_next": 0.3447946580654653,
+      "v_next": -1.0
+    }
+  }
+]
