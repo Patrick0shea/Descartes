@@ -1,0 +1,565 @@
+[
+  {
+    "tool": "auto_lirpa",
+    "grid_size": 8,
+    "nonnegativity": {
+      "property": "nonnegativity",
+      "result": "SAT",
+      "verification_time_seconds": 0.28583502769470215,
+      "n_cells": 64,
+      "min_lower_bound": -6.2897748947143555,
+      "n_cells_with_negative_lower_bound": 64,
+      "method": "CROWN, all output neurons bounded in one compute_bounds() call"
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "SAT",
+      "verification_time_seconds": 0.02322840690612793,
+      "computed_lower_bound": -24.585617065429688,
+      "computed_upper_bound": 144.74053955078125,
+      "method": "fixed all-ones Linear(N,1) head appended to model, single CROWN bound"
+    }
+  },
+  {
+    "tool": "alpha_beta_crown",
+    "grid_size": 8,
+    "nonnegativity": {
+      "property": "nonnegativity",
+      "result": "SAT",
+      "verification_time_seconds": 0.8508222103118896,
+      "n_cells": 64,
+      "min_lower_bound": -6.2897748947143555,
+      "n_cells_with_negative_lower_bound": 64,
+      "success_flag": false,
+      "method": "ABCrownSolver.compute_bounds, all output neurons in one call"
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "SAT",
+      "verification_time_seconds": 0.8774726390838623,
+      "computed_lower_bound": -24.585617065429688,
+      "computed_upper_bound": 144.74053955078125,
+      "method": "fixed all-ones Linear(N,1) head, single compute_bounds call"
+    }
+  },
+  {
+    "tool": "marabou",
+    "grid_size": 8,
+    "n_cells": 64,
+    "nonnegativity": {
+      "cells_checked": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        15,
+        16,
+        23,
+        24,
+        31,
+        32,
+        36,
+        39,
+        40,
+        47,
+        48,
+        55,
+        56,
+        57,
+        58
+      ],
+      "exhaustive": false,
+      "overall_result": "TIMEOUT",
+      "total_verification_time_seconds": 550.9768600463867,
+      "per_cell": [
+        {
+          "cell": 0,
+          "result": "SAT",
+          "verification_time_seconds": 3.9363043308258057,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 1,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 30.854245901107788,
+          "counterexample_value": null
+        },
+        {
+          "cell": 2,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 30.734415292739868,
+          "counterexample_value": null
+        },
+        {
+          "cell": 3,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 30.883089542388916,
+          "counterexample_value": null
+        },
+        {
+          "cell": 4,
+          "result": "SAT",
+          "verification_time_seconds": 24.86043357849121,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 5,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.604353189468384,
+          "counterexample_value": null
+        },
+        {
+          "cell": 6,
+          "result": "SAT",
+          "verification_time_seconds": 13.167184114456177,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 7,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.95173978805542,
+          "counterexample_value": null
+        },
+        {
+          "cell": 8,
+          "result": "SAT",
+          "verification_time_seconds": 2.6486432552337646,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 15,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.332308530807495,
+          "counterexample_value": null
+        },
+        {
+          "cell": 16,
+          "result": "SAT",
+          "verification_time_seconds": 3.4336743354797363,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 23,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.020143747329712,
+          "counterexample_value": null
+        },
+        {
+          "cell": 24,
+          "result": "SAT",
+          "verification_time_seconds": 26.341936349868774,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 31,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.137847423553467,
+          "counterexample_value": null
+        },
+        {
+          "cell": 32,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.32410430908203,
+          "counterexample_value": null
+        },
+        {
+          "cell": 36,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.4944109916687,
+          "counterexample_value": null
+        },
+        {
+          "cell": 39,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.28221035003662,
+          "counterexample_value": null
+        },
+        {
+          "cell": 40,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 30.412774324417114,
+          "counterexample_value": null
+        },
+        {
+          "cell": 47,
+          "result": "SAT",
+          "verification_time_seconds": 2.8499960899353027,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 48,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.531572580337524,
+          "counterexample_value": null
+        },
+        {
+          "cell": 55,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.24508500099182,
+          "counterexample_value": null
+        },
+        {
+          "cell": 56,
+          "result": "SAT",
+          "verification_time_seconds": 2.4493026733398438,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 57,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 30.8503897190094,
+          "counterexample_value": null
+        },
+        {
+          "cell": 58,
+          "result": "SAT",
+          "verification_time_seconds": 2.6842994689941406,
+          "counterexample_value": -1e-06
+        }
+      ]
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "TIMEOUT",
+      "verification_time_seconds": 61.45117521286011,
+      "above_max_query": {
+        "direction": "above_max",
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.739471912384033
+      },
+      "below_min_query": {
+        "direction": "below_min",
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.711703300476074
+      },
+      "api_used": "network.addInequality over all output vars (unit coefficients)"
+    }
+  },
+  {
+    "tool": "auto_lirpa",
+    "grid_size": 16,
+    "nonnegativity": {
+      "property": "nonnegativity",
+      "result": "SAT",
+      "verification_time_seconds": 0.276477575302124,
+      "n_cells": 256,
+      "min_lower_bound": -4.3942646980285645,
+      "n_cells_with_negative_lower_bound": 256,
+      "method": "CROWN, all output neurons bounded in one compute_bounds() call"
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "SAT",
+      "verification_time_seconds": 0.051967620849609375,
+      "computed_lower_bound": -21.07763671875,
+      "computed_upper_bound": 174.7117919921875,
+      "method": "fixed all-ones Linear(N,1) head appended to model, single CROWN bound"
+    }
+  },
+  {
+    "tool": "alpha_beta_crown",
+    "grid_size": 16,
+    "nonnegativity": {
+      "property": "nonnegativity",
+      "result": "SAT",
+      "verification_time_seconds": 0.8434388637542725,
+      "n_cells": 256,
+      "min_lower_bound": -4.3942646980285645,
+      "n_cells_with_negative_lower_bound": 256,
+      "success_flag": false,
+      "method": "ABCrownSolver.compute_bounds, all output neurons in one call"
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "SAT",
+      "verification_time_seconds": 0.3606686592102051,
+      "computed_lower_bound": -21.07763671875,
+      "computed_upper_bound": 174.7117919921875,
+      "method": "fixed all-ones Linear(N,1) head, single compute_bounds call"
+    }
+  },
+  {
+    "tool": "marabou",
+    "grid_size": 16,
+    "n_cells": 256,
+    "nonnegativity": {
+      "cells_checked": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        15,
+        136,
+        240,
+        255
+      ],
+      "exhaustive": false,
+      "overall_result": "TIMEOUT",
+      "total_verification_time_seconds": 74.97519493103027,
+      "per_cell": [
+        {
+          "cell": 0,
+          "result": "SAT",
+          "verification_time_seconds": 3.457881450653076,
+          "counterexample_value": -0.00042297374369942967
+        },
+        {
+          "cell": 1,
+          "result": "SAT",
+          "verification_time_seconds": 1.7786896228790283,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 2,
+          "result": "SAT",
+          "verification_time_seconds": 9.16544771194458,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 3,
+          "result": "SAT",
+          "verification_time_seconds": 2.788525104522705,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 4,
+          "result": "SAT",
+          "verification_time_seconds": 1.088883876800537,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 5,
+          "result": "SAT",
+          "verification_time_seconds": 19.505903959274292,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 15,
+          "result": "SAT",
+          "verification_time_seconds": 2.28558349609375,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 136,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.264566659927368,
+          "counterexample_value": null
+        },
+        {
+          "cell": 240,
+          "result": "SAT",
+          "verification_time_seconds": 1.0294601917266846,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 255,
+          "result": "SAT",
+          "verification_time_seconds": 2.188210964202881,
+          "counterexample_value": -1e-06
+        }
+      ]
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "TIMEOUT",
+      "verification_time_seconds": 61.131728410720825,
+      "above_max_query": {
+        "direction": "above_max",
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.801774740219116
+      },
+      "below_min_query": {
+        "direction": "below_min",
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.32995367050171
+      },
+      "api_used": "network.addInequality over all output vars (unit coefficients)"
+    }
+  },
+  {
+    "tool": "auto_lirpa",
+    "grid_size": 32,
+    "nonnegativity": {
+      "property": "nonnegativity",
+      "result": "SAT",
+      "verification_time_seconds": 0.2807888984680176,
+      "n_cells": 1024,
+      "min_lower_bound": -0.974463164806366,
+      "n_cells_with_negative_lower_bound": 1024,
+      "method": "CROWN, all output neurons bounded in one compute_bounds() call"
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "SAT",
+      "verification_time_seconds": 0.10236573219299316,
+      "computed_lower_bound": -1.935251235961914,
+      "computed_upper_bound": 45.498104095458984,
+      "method": "fixed all-ones Linear(N,1) head appended to model, single CROWN bound"
+    }
+  },
+  {
+    "tool": "alpha_beta_crown",
+    "grid_size": 32,
+    "nonnegativity": {
+      "property": "nonnegativity",
+      "result": "SAT",
+      "verification_time_seconds": 1.5621569156646729,
+      "n_cells": 1024,
+      "min_lower_bound": -0.974463164806366,
+      "n_cells_with_negative_lower_bound": 1024,
+      "success_flag": false,
+      "method": "ABCrownSolver.compute_bounds, all output neurons in one call"
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "SAT",
+      "verification_time_seconds": 0.3343467712402344,
+      "computed_lower_bound": -1.935251235961914,
+      "computed_upper_bound": 45.498104095458984,
+      "method": "fixed all-ones Linear(N,1) head, single compute_bounds call"
+    }
+  },
+  {
+    "tool": "marabou",
+    "grid_size": 32,
+    "n_cells": 1024,
+    "nonnegativity": {
+      "cells_checked": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        31,
+        528,
+        992,
+        1023
+      ],
+      "exhaustive": false,
+      "overall_result": "TIMEOUT",
+      "total_verification_time_seconds": 39.19549083709717,
+      "per_cell": [
+        {
+          "cell": 0,
+          "result": "SAT",
+          "verification_time_seconds": 0.9459848403930664,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 1,
+          "result": "SAT",
+          "verification_time_seconds": 0.798567533493042,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 2,
+          "result": "SAT",
+          "verification_time_seconds": 0.860792875289917,
+          "counterexample_value": -0.002072060171902258
+        },
+        {
+          "cell": 3,
+          "result": "SAT",
+          "verification_time_seconds": 0.938899040222168,
+          "counterexample_value": -0.0008606556579438356
+        },
+        {
+          "cell": 4,
+          "result": "SAT",
+          "verification_time_seconds": 0.9063036441802979,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 5,
+          "result": "SAT",
+          "verification_time_seconds": 0.9420034885406494,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 31,
+          "result": "SAT",
+          "verification_time_seconds": 0.8133814334869385,
+          "counterexample_value": -0.002075283605442811
+        },
+        {
+          "cell": 528,
+          "result": "TIMEOUT",
+          "verification_time_seconds": 31.003562450408936,
+          "counterexample_value": null
+        },
+        {
+          "cell": 992,
+          "result": "SAT",
+          "verification_time_seconds": 0.7912919521331787,
+          "counterexample_value": -1e-06
+        },
+        {
+          "cell": 1023,
+          "result": "SAT",
+          "verification_time_seconds": 0.8022134304046631,
+          "counterexample_value": -0.00425455543238286
+        }
+      ]
+    },
+    "bounded_sum": {
+      "property": "bounded_sum",
+      "sum_bounds": [
+        4.0,
+        20.0
+      ],
+      "result": "UNSAT",
+      "verification_time_seconds": 4.20437216758728,
+      "above_max_query": {
+        "direction": "above_max",
+        "result": "UNSAT",
+        "verification_time_seconds": 3.0977728366851807
+      },
+      "below_min_query": {
+        "direction": "below_min",
+        "result": "UNSAT",
+        "verification_time_seconds": 1.1065993309020996
+      },
+      "api_used": "network.addInequality over all output vars (unit coefficients)"
+    }
+  }
+]

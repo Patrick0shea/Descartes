@@ -1,0 +1,26 @@
+{
+  "tool": "alpha_beta_crown",
+  "grid_size": 32,
+  "nonnegativity": {
+    "property": "nonnegativity",
+    "result": "SAT",
+    "verification_time_seconds": 1.5621569156646729,
+    "n_cells": 1024,
+    "min_lower_bound": -0.974463164806366,
+    "n_cells_with_negative_lower_bound": 1024,
+    "success_flag": false,
+    "method": "ABCrownSolver.compute_bounds, all output neurons in one call"
+  },
+  "bounded_sum": {
+    "property": "bounded_sum",
+    "sum_bounds": [
+      4.0,
+      20.0
+    ],
+    "result": "SAT",
+    "verification_time_seconds": 0.3343467712402344,
+    "computed_lower_bound": -1.935251235961914,
+    "computed_upper_bound": 45.498104095458984,
+    "method": "fixed all-ones Linear(N,1) head, single compute_bounds call"
+  }
+}

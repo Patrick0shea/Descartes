@@ -1,0 +1,104 @@
+{
+  "tool": "marabou",
+  "grid_size": 32,
+  "n_cells": 1024,
+  "nonnegativity": {
+    "cells_checked": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      31,
+      528,
+      992,
+      1023
+    ],
+    "exhaustive": false,
+    "overall_result": "TIMEOUT",
+    "total_verification_time_seconds": 39.19549083709717,
+    "per_cell": [
+      {
+        "cell": 0,
+        "result": "SAT",
+        "verification_time_seconds": 0.9459848403930664,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 1,
+        "result": "SAT",
+        "verification_time_seconds": 0.798567533493042,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 2,
+        "result": "SAT",
+        "verification_time_seconds": 0.860792875289917,
+        "counterexample_value": -0.002072060171902258
+      },
+      {
+        "cell": 3,
+        "result": "SAT",
+        "verification_time_seconds": 0.938899040222168,
+        "counterexample_value": -0.0008606556579438356
+      },
+      {
+        "cell": 4,
+        "result": "SAT",
+        "verification_time_seconds": 0.9063036441802979,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 5,
+        "result": "SAT",
+        "verification_time_seconds": 0.9420034885406494,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 31,
+        "result": "SAT",
+        "verification_time_seconds": 0.8133814334869385,
+        "counterexample_value": -0.002075283605442811
+      },
+      {
+        "cell": 528,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.003562450408936,
+        "counterexample_value": null
+      },
+      {
+        "cell": 992,
+        "result": "SAT",
+        "verification_time_seconds": 0.7912919521331787,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 1023,
+        "result": "SAT",
+        "verification_time_seconds": 0.8022134304046631,
+        "counterexample_value": -0.00425455543238286
+      }
+    ]
+  },
+  "bounded_sum": {
+    "property": "bounded_sum",
+    "sum_bounds": [
+      4.0,
+      20.0
+    ],
+    "result": "UNSAT",
+    "verification_time_seconds": 4.20437216758728,
+    "above_max_query": {
+      "direction": "above_max",
+      "result": "UNSAT",
+      "verification_time_seconds": 3.0977728366851807
+    },
+    "below_min_query": {
+      "direction": "below_min",
+      "result": "UNSAT",
+      "verification_time_seconds": 1.1065993309020996
+    },
+    "api_used": "network.addInequality over all output vars (unit coefficients)"
+  }
+}
