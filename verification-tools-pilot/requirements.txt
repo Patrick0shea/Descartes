@@ -1,0 +1,40 @@
+# Core (model, data, training, ONNX export)
+torch==2.14.0
+numpy==2.4.6
+onnx==1.22.0
+onnxruntime==1.30.0
+
+# auto_LiRPA: the PyPI package (auto-LiRPA 0.2/0.3) is stale and pins
+# torch<1.13, which conflicts with any current torch. Install from source
+# instead (see README.md):
+#   pip install --no-deps "git+https://github.com/Verified-Intelligence/auto_LiRPA.git"
+#   pip install appdirs graphviz tqdm packaging
+appdirs==1.4.4
+graphviz==0.21
+tqdm
+packaging
+
+# Marabou
+maraboupy==2.0.0
+
+# alpha-beta-CROWN is not pip-installable as a single package. It needs a
+# git clone + `pip install --no-deps -e .` plus a long tail of manually
+# resolved dependencies (see README.md "alpha-beta-CROWN setup" for the
+# exact list and why --no-deps was necessary: the package pins
+# torch==2.11.0, which conflicts with the torch already installed here).
+# Packages below are what that install ultimately needed in this venv:
+pyyaml==6.0.3
+pandas==3.0.5
+psutil==7.2.2
+sortedcontainers==2.4.0
+sympy==1.14.0
+termcolor==3.3.0
+onnxoptimizer==0.4.2
+onnxsim==0.7.3
+pillow==12.3.0
+torchvision
+scikit-learn==1.9.1
+skl2onnx==1.20.0
+gurobipy==13.0.3
+# onnx2pytorch: install from source, no PyPI release
+#   pip install --no-deps "git+https://github.com/Verified-Intelligence/onnx2pytorch@0826948e0d50cd09d909b7f26b2ee9ca2d3d71b3"

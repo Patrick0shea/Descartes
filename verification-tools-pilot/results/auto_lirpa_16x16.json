@@ -1,0 +1,25 @@
+{
+  "tool": "auto_lirpa",
+  "grid_size": 16,
+  "nonnegativity": {
+    "property": "nonnegativity",
+    "result": "SAT",
+    "verification_time_seconds": 0.276477575302124,
+    "n_cells": 256,
+    "min_lower_bound": -4.3942646980285645,
+    "n_cells_with_negative_lower_bound": 256,
+    "method": "CROWN, all output neurons bounded in one compute_bounds() call"
+  },
+  "bounded_sum": {
+    "property": "bounded_sum",
+    "sum_bounds": [
+      4.0,
+      20.0
+    ],
+    "result": "SAT",
+    "verification_time_seconds": 0.051967620849609375,
+    "computed_lower_bound": -21.07763671875,
+    "computed_upper_bound": 174.7117919921875,
+    "method": "fixed all-ones Linear(N,1) head appended to model, single CROWN bound"
+  }
+}

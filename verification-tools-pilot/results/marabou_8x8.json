@@ -1,0 +1,202 @@
+{
+  "tool": "marabou",
+  "grid_size": 8,
+  "n_cells": 64,
+  "nonnegativity": {
+    "cells_checked": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      15,
+      16,
+      23,
+      24,
+      31,
+      32,
+      36,
+      39,
+      40,
+      47,
+      48,
+      55,
+      56,
+      57,
+      58
+    ],
+    "exhaustive": false,
+    "overall_result": "TIMEOUT",
+    "total_verification_time_seconds": 550.9768600463867,
+    "per_cell": [
+      {
+        "cell": 0,
+        "result": "SAT",
+        "verification_time_seconds": 3.9363043308258057,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 1,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.854245901107788,
+        "counterexample_value": null
+      },
+      {
+        "cell": 2,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.734415292739868,
+        "counterexample_value": null
+      },
+      {
+        "cell": 3,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.883089542388916,
+        "counterexample_value": null
+      },
+      {
+        "cell": 4,
+        "result": "SAT",
+        "verification_time_seconds": 24.86043357849121,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 5,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.604353189468384,
+        "counterexample_value": null
+      },
+      {
+        "cell": 6,
+        "result": "SAT",
+        "verification_time_seconds": 13.167184114456177,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 7,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.95173978805542,
+        "counterexample_value": null
+      },
+      {
+        "cell": 8,
+        "result": "SAT",
+        "verification_time_seconds": 2.6486432552337646,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 15,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.332308530807495,
+        "counterexample_value": null
+      },
+      {
+        "cell": 16,
+        "result": "SAT",
+        "verification_time_seconds": 3.4336743354797363,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 23,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.020143747329712,
+        "counterexample_value": null
+      },
+      {
+        "cell": 24,
+        "result": "SAT",
+        "verification_time_seconds": 26.341936349868774,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 31,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.137847423553467,
+        "counterexample_value": null
+      },
+      {
+        "cell": 32,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.32410430908203,
+        "counterexample_value": null
+      },
+      {
+        "cell": 36,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.4944109916687,
+        "counterexample_value": null
+      },
+      {
+        "cell": 39,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.28221035003662,
+        "counterexample_value": null
+      },
+      {
+        "cell": 40,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.412774324417114,
+        "counterexample_value": null
+      },
+      {
+        "cell": 47,
+        "result": "SAT",
+        "verification_time_seconds": 2.8499960899353027,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 48,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.531572580337524,
+        "counterexample_value": null
+      },
+      {
+        "cell": 55,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.24508500099182,
+        "counterexample_value": null
+      },
+      {
+        "cell": 56,
+        "result": "SAT",
+        "verification_time_seconds": 2.4493026733398438,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 57,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 30.8503897190094,
+        "counterexample_value": null
+      },
+      {
+        "cell": 58,
+        "result": "SAT",
+        "verification_time_seconds": 2.6842994689941406,
+        "counterexample_value": -1e-06
+      }
+    ]
+  },
+  "bounded_sum": {
+    "property": "bounded_sum",
+    "sum_bounds": [
+      4.0,
+      20.0
+    ],
+    "result": "TIMEOUT",
+    "verification_time_seconds": 61.45117521286011,
+    "above_max_query": {
+      "direction": "above_max",
+      "result": "TIMEOUT",
+      "verification_time_seconds": 30.739471912384033
+    },
+    "below_min_query": {
+      "direction": "below_min",
+      "result": "TIMEOUT",
+      "verification_time_seconds": 30.711703300476074
+    },
+    "api_used": "network.addInequality over all output vars (unit coefficients)"
+  }
+}

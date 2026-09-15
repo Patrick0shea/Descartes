@@ -1,0 +1,104 @@
+{
+  "tool": "marabou",
+  "grid_size": 16,
+  "n_cells": 256,
+  "nonnegativity": {
+    "cells_checked": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      15,
+      136,
+      240,
+      255
+    ],
+    "exhaustive": false,
+    "overall_result": "TIMEOUT",
+    "total_verification_time_seconds": 74.97519493103027,
+    "per_cell": [
+      {
+        "cell": 0,
+        "result": "SAT",
+        "verification_time_seconds": 3.457881450653076,
+        "counterexample_value": -0.00042297374369942967
+      },
+      {
+        "cell": 1,
+        "result": "SAT",
+        "verification_time_seconds": 1.7786896228790283,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 2,
+        "result": "SAT",
+        "verification_time_seconds": 9.16544771194458,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 3,
+        "result": "SAT",
+        "verification_time_seconds": 2.788525104522705,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 4,
+        "result": "SAT",
+        "verification_time_seconds": 1.088883876800537,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 5,
+        "result": "SAT",
+        "verification_time_seconds": 19.505903959274292,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 15,
+        "result": "SAT",
+        "verification_time_seconds": 2.28558349609375,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 136,
+        "result": "TIMEOUT",
+        "verification_time_seconds": 31.264566659927368,
+        "counterexample_value": null
+      },
+      {
+        "cell": 240,
+        "result": "SAT",
+        "verification_time_seconds": 1.0294601917266846,
+        "counterexample_value": -1e-06
+      },
+      {
+        "cell": 255,
+        "result": "SAT",
+        "verification_time_seconds": 2.188210964202881,
+        "counterexample_value": -1e-06
+      }
+    ]
+  },
+  "bounded_sum": {
+    "property": "bounded_sum",
+    "sum_bounds": [
+      4.0,
+      20.0
+    ],
+    "result": "TIMEOUT",
+    "verification_time_seconds": 61.131728410720825,
+    "above_max_query": {
+      "direction": "above_max",
+      "result": "TIMEOUT",
+      "verification_time_seconds": 30.801774740219116
+    },
+    "below_min_query": {
+      "direction": "below_min",
+      "result": "TIMEOUT",
+      "verification_time_seconds": 30.32995367050171
+    },
+    "api_used": "network.addInequality over all output vars (unit coefficients)"
+  }
+}
