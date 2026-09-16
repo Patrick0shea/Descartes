@@ -171,3 +171,35 @@ GEOMETRIC_MOMENTUM_PROPERTIES = [
         axis="y", epsilon=1e-5, expect="UNSAT",
     ),
 ]
+
+# Step 6 (Model C): soft-geometric surrogate -- translation-invariant
+# but NOT momentum-conserving by construction. Epsilon sweep over
+# [1.0, 0.1, 1e-2, 1e-3, 1e-4, 1e-5] for both axes. All set to
+# expect="UNSAT" as the hypothesis (what we hope training has achieved);
+# Marabou's actual answer reveals the true verification frontier, i.e.
+# the tightest epsilon at which Model C can be formally certified.
+# Comparing this frontier to Model A's (SAT at 1e-4) and Model B's
+# (UNSAT at 1e-5) quantifies Model C's intermediate position.
+_SOFT_EPSILONS = [1.0, 0.1, 1e-2, 1e-3, 1e-4, 1e-5]
+
+SOFT_GEOMETRIC_MOMENTUM_PROPERTIES: list[MomentumProperty] = []
+for _eps in _SOFT_EPSILONS:
+    _eps_str = f"{_eps:.0e}" if _eps < 0.1 else str(_eps)
+    SOFT_GEOMETRIC_MOMENTUM_PROPERTIES.append(
+        MomentumProperty(
+            name=f"soft_geometric_momentum_px_eps_{_eps_str}",
+            description=f"|Px_next - Px| <= {_eps_str} for all states in D (soft-geometric, epsilon sweep)",
+            axis="x",
+            epsilon=_eps,
+            expect="UNSAT",
+        )
+    )
+    SOFT_GEOMETRIC_MOMENTUM_PROPERTIES.append(
+        MomentumProperty(
+            name=f"soft_geometric_momentum_py_eps_{_eps_str}",
+            description=f"|Py_next - Py| <= {_eps_str} for all states in D (soft-geometric, epsilon sweep)",
+            axis="y",
+            epsilon=_eps,
+            expect="UNSAT",
+        )
+    )

@@ -1,0 +1,161 @@
+[
+  {
+    "name": "soft_geometric_momentum_px_eps_1.0",
+    "description": "|Px_next - Px| <= 1.0 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "soft_geometric_momentum_py_eps_1.0",
+    "description": "|Py_next - Py| <= 1.0 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "soft_geometric_momentum_px_eps_0.1",
+    "description": "|Px_next - Px| <= 0.1 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "soft_geometric_momentum_py_eps_0.1",
+    "description": "|Py_next - Py| <= 0.1 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "soft_geometric_momentum_px_eps_1e-02",
+    "description": "|Px_next - Px| <= 1e-02 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "soft_geometric_momentum_py_eps_1e-02",
+    "description": "|Py_next - Py| <= 1e-02 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "soft_geometric_momentum_px_eps_1e-03",
+    "description": "|Px_next - Px| <= 1e-03 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 4857,
+    "result": "VIOLATION_FOUND",
+    "example_violation": {
+      "input_state": [
+        0.017868302762508392,
+        0.814172625541687,
+        -0.1613980233669281,
+        0.29414358735084534,
+        -0.7566603422164917,
+        -0.4408479928970337,
+        -0.11989978700876236,
+        -0.7483859658241272
+      ],
+      "momentum_before": -0.28129780292510986,
+      "momentum_after": -0.28236159682273865,
+      "momentum_error": -0.0010637938976287842
+    }
+  },
+  {
+    "name": "soft_geometric_momentum_py_eps_1e-03",
+    "description": "|Py_next - Py| <= 1e-03 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 0,
+    "result": "NO_VIOLATION_FOUND"
+  },
+  {
+    "name": "soft_geometric_momentum_px_eps_1e-04",
+    "description": "|Px_next - Px| <= 1e-04 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 113504,
+    "result": "VIOLATION_FOUND",
+    "example_violation": {
+      "input_state": [
+        -0.6774564385414124,
+        0.0020895502530038357,
+        -0.6953758001327515,
+        0.39264073967933655,
+        -0.25844988226890564,
+        -0.5710980892181396,
+        -0.3969758152961731,
+        0.2605651915073395
+      ],
+      "momentum_before": -1.0923516750335693,
+      "momentum_after": -1.0922317504882812,
+      "momentum_error": 0.00011992454528808594
+    }
+  },
+  {
+    "name": "soft_geometric_momentum_py_eps_1e-04",
+    "description": "|Py_next - Py| <= 1e-04 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 61875,
+    "result": "VIOLATION_FOUND",
+    "example_violation": {
+      "input_state": [
+        -0.6774564385414124,
+        0.0020895502530038357,
+        -0.6953758001327515,
+        0.39264073967933655,
+        -0.25844988226890564,
+        -0.5710980892181396,
+        -0.3969758152961731,
+        0.2605651915073395
+      ],
+      "momentum_before": 0.653205931186676,
+      "momentum_after": 0.6533584594726562,
+      "momentum_error": 0.0001525282859802246
+    }
+  },
+  {
+    "name": "soft_geometric_momentum_px_eps_1e-05",
+    "description": "|Px_next - Px| <= 1e-05 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 191128,
+    "result": "VIOLATION_FOUND",
+    "example_violation": {
+      "input_state": [
+        0.10916957259178162,
+        -0.8723654747009277,
+        0.6552623510360718,
+        0.26332879066467285,
+        1.2388211488723755,
+        -0.6982753276824951,
+        0.9413960576057434,
+        0.7862422466278076
+      ],
+      "momentum_before": 1.59665846824646,
+      "momentum_after": 1.5966030359268188,
+      "momentum_error": -5.543231964111328e-05
+    }
+  },
+  {
+    "name": "soft_geometric_momentum_py_eps_1e-05",
+    "description": "|Py_next - Py| <= 1e-05 for all states in D (soft-geometric, epsilon sweep)",
+    "n_samples": 200000,
+    "n_violations_found": 183638,
+    "result": "VIOLATION_FOUND",
+    "example_violation": {
+      "input_state": [
+        0.10916957259178162,
+        -0.8723654747009277,
+        0.6552623510360718,
+        0.26332879066467285,
+        1.2388211488723755,
+        -0.6982753276824951,
+        0.9413960576057434,
+        0.7862422466278076
+      ],
+      "momentum_before": 1.0495710372924805,
+      "momentum_after": 1.0495426654815674,
+      "momentum_error": -2.8371810913085938e-05
+    }
+  }
+]

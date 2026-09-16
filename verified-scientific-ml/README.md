@@ -851,3 +851,170 @@ untrained* weights (proving they are structural, not learned), that
 training reduces loss, ONNX export equivalence, and — end to end — that
 the real trained model verifies UNSAT at ε=1e-4, the exact tolerance the
 baseline was SAT on.
+
+---
+
+## Step 6 — Model C: Soft Geometric Surrogate
+
+> **Research question:** Does formal verifiability scale *smoothly* with
+> the amount of geometric structure, or does the benefit only appear when
+> constraints are hard-coded exactly?
+
+Step 5 established two extremes: Model A (no structure, UNSAT only at
+ε=1.0) and Model B (exact ±F momentum identity, UNSAT at ε=1e-5). Step
+6 fills in the middle with **Model C** — a *soft geometric* surrogate
+that shares Model B's translation-invariant feature extraction but does
+**not** hard-code Newton's third law.
+
+### Architecture: `ParticleSoftGeometricMLP`
+
+```
+Input  (8D) : [x1, y1, vx1, vy1, x2, y2, vx2, vy2]
+   │
+   ▼ extract_rel  (fixed Linear 8→4, no grad)
+[rx, ry, dvx, dvy]  =  [x2-x1, y2-y1, vx2-vx1, vy2-vy1]
+   │
+   ▼ delta_net  (learned  4→16→16→4, ReLU)
+[dvx1, dvy1, dvx2, dvy2]           ← four independent velocity updates
+   │
+   ▼ combine  (fixed Linear 12→8, no grad)
+[x1+dt·vx1,  y1+dt·vy1,  vx1+dvx1,  vy1+dvy1,
+ x2+dt·vx2,  y2+dt·vy2,  vx2+dvx2,  vy2+dvy2]
+```
+
+Structural differences from Model B:
+- `extract_rel` and kinematics are identical to Model B.
+- `delta_net` outputs **four independent** velocity deltas instead of a
+  single shared force (F, -F). There is no algebraic coupling between
+  particle 1 and particle 2's updates, so `dvx1 + dvx2 ≠ 0` in general.
+- Translation invariance is structural; momentum conservation is learned
+  (approximately, from data).
+
+All layers use only `nn.Linear` + ReLU — no tensor indexing, no Gather
+ops — so the ONNX export remains Marabou-compatible.
+
+### Training
+
+Identical setup to Models A and B:
+
+| setting | value |
+|---|---|
+| dataset | `data/particle_dataset.npz` (unchanged) |
+| split | 70 / 15 / 15 (train / val / test) |
+| loss | MSE on full 8-dim next state |
+| optimiser | Adam, lr=1e-3, batch=256 |
+| epochs | 200 (best-val-loss checkpoint) |
+| seed | 42 |
+| hidden dim | 16 (same as A and B) |
+
+```bash
+python -m models.train_soft_geometric
+# → checkpoints/particle_soft_geometric.pt
+```
+
+Best validation MSE: **8.8×10⁻⁷** (on par with Model B at 8.4×10⁻⁷).
+
+### Evaluation
+
+```bash
+python -m models.evaluate_soft_geometric
+# → checkpoints/particle_soft_geometric_evaluation_report.txt
+```
+
+| metric | Model A (MLP) | Model C (soft geo) | Model B (hard geo) |
+|---|---|---|---|
+| Test MSE | ~9×10⁻⁷ | **9.4×10⁻⁷** | ~8×10⁻⁷ |
+| Mean \|ΔPx\| (test set) | ~3.5×10⁻² | **2.1×10⁻⁴** | ~1×10⁻⁷ |
+| Mean \|ΔPy\| (test set) | ~1.5×10⁻² | **8.7×10⁻⁵** | ~5×10⁻⁸ |
+| Rollout momentum drift (200 steps) | ~0.30 / 0.06 | **0.031 / 0.006** | ~2×10⁻⁷ / ~9×10⁻⁹ |
+
+Model C achieves roughly 100× better empirical momentum conservation
+than Model A on the test set and ~10× better in the long rollout, purely
+by conditioning on relative state — with no hard constraint at all.
+
+### Formal verification — epsilon sweep
+
+```bash
+python -m verification.export_soft_geometric_onnx
+# → verification/artifacts/particle_soft_geometric.onnx
+
+python -m verification.verify_soft_geometric
+# → verification/artifacts/soft_geometric_verification_results.json
+```
+
+Marabou queries over the full domain D (same as Steps 4 and 5):
+
+| ε | Px | Py |
+|---|---|---|
+| 1.0 | **UNSAT** | **UNSAT** |
+| 0.1 | **UNSAT** | **UNSAT** |
+| 1e-2 | **UNSAT** | **UNSAT** |
+| 1e-3 | SAT (counterexample found) | SAT |
+| 1e-4 | SAT | SAT |
+| 1e-5 | SAT | SAT |
+
+**Tightest formally-verified tolerance for Model C: ε = 1e-2.**
+
+### Three-way comparison
+
+| | Model A (plain MLP) | Model C (soft geometric) | Model B (hard geometric) |
+|---|---|---|---|
+| Momentum by construction | ✗ | ✗ | ✓ |
+| Translation invariant | ✗ | ✓ | ✓ |
+| Rollout drift (ΔPx, 200 steps) | ~0.30 | ~0.031 | ~2×10⁻⁷ |
+| Tightest UNSAT ε | **1.0** | **1e-2** | **1e-5** |
+| Improvement over A | — | **100×** | **100,000×** |
+
+### Interpretation
+
+The answer to the step's research question is: **yes, verifiability
+scales with structure — but not uniformly.**
+
+Moving from Model A to Model C (adding translation invariance, no hard
+constraint) tightens the formally-verified bound by **100×** (1.0 → 1e-2).
+Moving from Model C to Model B (adding the exact ±F momentum identity)
+tightens it by a further **1,000×** (1e-2 → 1e-5). The transition is
+not a cliff — structure at every level helps — but the hard algebraic
+constraint delivers a disproportionate gain because it reduces a
+nonlinear learned relationship to a fixed linear identity that the SMT
+solver resolves without case-splitting.
+
+This is the thesis's central finding: **geometric inductive biases
+improve formal verifiability in proportion to their structural strength**,
+and even soft/partial biases (translation invariance alone) provide
+measurable, independently-verified improvements over an unstructured
+baseline on identical terms.
+
+### Random testing baseline
+
+```bash
+python -m verification.random_search_soft_geometric
+# → verification/artifacts/soft_geometric_random_testing_results.json
+```
+
+200,000 random samples from D:
+
+| ε | Px violations | Py violations |
+|---|---|---|
+| 1.0, 0.1, 1e-2 | 0 / 200,000 | 0 / 200,000 |
+| 1e-3 | 4,857 / 200,000 (2.4%) | 0 / 200,000 |
+| 1e-4 | ~57,000–113,000 / 200,000 | ~57,000–113,000 / 200,000 |
+| 1e-5 | ~184,000–191,000 / 200,000 | ~184,000–191,000 / 200,000 |
+
+Consistent with Marabou: violations appear between ε=1e-2 and ε=1e-3
+for Px. Random testing corroborates the formal result but — as in Steps
+3 and 4 — cannot substitute for it: the UNSAT at ε=1e-2 is a *proof*,
+the zero violation count at ε=1e-2 is only evidence.
+
+### Run tests
+
+```bash
+pytest tests/test_particle_soft_geometric.py -v
+```
+
+`tests/test_particle_soft_geometric.py` checks: output shape, that
+translation invariance holds for random weights (structural, not
+learned), that momentum is *not* conserved by construction (random
+weights give |ΔPx| > 1e-3), that fixed layers have no gradient, ONNX
+export equivalence, and — end to end — that Marabou verifies UNSAT at
+the loose ε=1.0 bound.
