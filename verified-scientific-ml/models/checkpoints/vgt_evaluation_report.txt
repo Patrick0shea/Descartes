@@ -1,0 +1,22 @@
+=== VGT vs Standard Model C: Evaluation Report ===
+
+Test set: 15000 examples
+
+Rollout: 200 steps from fixed initial state
+
+
+Metric                                         Standard            VGT
+----------------------------------------------------------------------
+Test MSE                                      9.447e-07      1.072e-06
+Test MAE                                      5.532e-04      6.684e-04
+Mean |dPx| (test set)                         2.090e-04      4.325e-05
+Mean |dPy| (test set)                         8.683e-05      3.001e-05
+Max |dPx| (test set)                          5.928e-03      1.320e-03
+Max |dPy| (test set)                          2.236e-03      9.027e-04
+Rollout final |dPx| (200 steps)               2.574e-04      5.116e-03
+Rollout final |dPy| (200 steps)               1.922e-03      3.855e-03
+----------------------------------------------------------------------
+
+Formal verification (Marabou epsilon sweep):
+  Standard Model C: UNSAT at epsilon=1e-2, SAT at epsilon=1e-3
+  VGT Model C:      see verification/artifacts/vgt_results.json

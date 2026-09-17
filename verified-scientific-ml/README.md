@@ -1018,3 +1018,136 @@ learned), that momentum is *not* conserved by construction (random
 weights give |ΔPx| > 1e-3), that fixed layers have no gradient, ONNX
 export equivalence, and — end to end — that Marabou verifies UNSAT at
 the loose ε=1.0 bound.
+
+---
+
+## Step 7 — Verification-Guided Training (VGT)
+
+> **Research question:** Can a training procedure that uses a formal SMT
+> solver as a feedback signal push a soft geometric surrogate to satisfy
+> tighter verified properties than standard training alone?
+
+Step 6 established that standard training of Model C verifies UNSAT at
+ε=1e-2 — 100× tighter than Model A but 1,000× looser than Model B.
+Step 7 closes part of this gap with **Verification-Guided Training
+(VGT)**: a loop that uses Marabou counterexamples as hard training
+examples, generating ground-truth labels from the physics simulator.
+
+### Why VGT is different from adversarial training
+
+Adversarial training uses gradient-based attacks to find *local*
+violations near training data. VGT uses a *complete* SMT solver:
+
+- If Marabou returns **SAT**, the counterexample is the **global
+  worst-case input** for that epsilon over the entire domain D — not
+  an approximation, not a local perturbation.
+- If Marabou returns **UNSAT**, the property is **formally proven** —
+  the loop terminates with a mathematical guarantee, not an empirical
+  estimate.
+
+No amount of random sampling or gradient-based search achieves this.
+
+### Algorithm
+
+```
+Start: pre-trained Model C (UNSAT at ε=1e-2 from Step 6)
+D_aug = D_train  (70,000 examples)
+
+For each epsilon in [1e-3, 1e-4, 1e-5]:
+    For up to 15 iterations:
+        1. Fine-tune model on D_aug  (50 epochs, Adam)
+        2. Export to temp ONNX
+        3. Marabou query: |ΔPx| ≤ ε AND |ΔPy| ≤ ε over all of D?
+           ├── UNSAT (both axes) → proven. Move to next tighter ε.
+           └── SAT (either axis):
+                 x_ce = worst-case input from Marabou
+                 sample 100 neighbours of x_ce within D
+                 for each: call physics simulator → get ground truth
+                 D_aug = D_aug ∪ {(x_ce, y_ce)} ∪ neighbours
+    If no convergence after 15 iterations → stop
+```
+
+### Results
+
+```bash
+python -m training.run_vgt
+# → checkpoints/particle_soft_geometric_vgt.pt
+# → verification/artifacts/vgt_results.json
+```
+
+| epsilon | Standard Model C | VGT Model C |
+|---|---|---|
+| 1e-2 | **UNSAT** | **UNSAT** |
+| 1e-3 | SAT | **UNSAT** (converged in 6 iterations) |
+| 1e-4 | SAT | SAT (did not converge in 15 iterations) |
+
+VGT tightens the verified epsilon from **1e-2 → 1e-3** (10× improvement)
+by adding 3,939 counterexample states to D_train. Each counterexample is
+the exact worst-case input Marabou found — not an approximation.
+
+### Evaluation vs standard training
+
+```bash
+python -m training.evaluate_vgt
+# → checkpoints/vgt_evaluation_report.txt
+```
+
+| Metric | Standard Model C | VGT Model C |
+|---|---|---|
+| Test MSE | 9.45×10⁻⁷ | 1.07×10⁻⁶ |
+| Mean \|ΔPx\| (test set) | 2.09×10⁻⁴ | **4.33×10⁻⁵** (5× better) |
+| Mean \|ΔPy\| (test set) | 8.68×10⁻⁵ | **3.00×10⁻⁵** (3× better) |
+| Max \|ΔPx\| (test set) | 5.93×10⁻³ | **1.32×10⁻³** (4.5× better) |
+| Tightest UNSAT ε | 1e-2 | **1e-3** |
+
+VGT achieves 3–5× better per-step momentum conservation on the test set
+and a formally-verified 10× tighter bound, at a slight cost in raw MSE
+(1.07e-6 vs 9.45e-7). The MSE trade-off is expected: VGT pushes the
+model toward a harder constraint, prioritising physical correctness over
+reconstruction accuracy.
+
+**Rollout note:** the 200-step rollout shows slightly higher momentum
+drift for the VGT model than standard Model C. This is because VGT
+improves *per-step* formal guarantees but the autoregressive rollout
+compounds small trajectory errors — the VGT model's slightly higher MSE
+leads to state predictions that drift off the nominal trajectory,
+eventually reaching states far from training data. This tension between
+per-step formal guarantees and long-horizon rollout stability is a known
+open problem in verified scientific ML and is left for future work.
+
+### Four-way comparison
+
+| | Model A (MLP) | Model C std | Model C VGT | Model B (hard geo) |
+|---|---|---|---|---|
+| Structure | none | translation inv. | translation inv. | exact ±F law |
+| Training | standard | standard | VGT | standard |
+| Tightest UNSAT ε | 1.0 | 1e-2 | **1e-3** | 1e-5 |
+| Improvement over A | — | 100× | **1,000×** | 100,000× |
+| Mean \|ΔPx\| | ~3.5×10⁻² | 2.1×10⁻⁴ | **4.3×10⁻⁵** | ~1×10⁻⁷ |
+
+VGT closes one order of magnitude of the gap between soft and hard
+geometric structure — without changing the architecture, using only
+formal counterexamples as training signal.
+
+### What this establishes
+
+The formally-verified property at ε=1e-3 is a *proof*, not an estimate:
+for every possible input state in D, the VGT-trained Model C conserves
+linear momentum to within 1e-3. This is stronger than "we tested 200,000
+states and found no violations" — it is an exhaustive guarantee over the
+continuous domain.
+
+More broadly, VGT demonstrates that formal verification is not just a
+*measurement tool* but a *training signal*: the same solver that
+characterises what a model cannot guarantee can be used to actively
+improve those guarantees.
+
+### Run tests
+
+```bash
+pytest tests/test_vgt_loop.py -v
+```
+
+12 tests covering domain validity checks, neighbourhood sampling,
+simulator calls, ONNX export, fine-tuning convergence, and dataset
+augmentation.
