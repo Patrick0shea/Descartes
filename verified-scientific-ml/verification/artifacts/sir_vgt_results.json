@@ -1,0 +1,300 @@
+{
+  "epsilon_results": [
+    {
+      "epsilon": 0.001,
+      "converged": 1,
+      "iterations_used": 13,
+      "n_augmented_total": 1212
+    },
+    {
+      "epsilon": 0.0001,
+      "converged": 0,
+      "iterations_used": 15,
+      "n_augmented_total": 2727
+    }
+  ],
+  "iterations": [
+    {
+      "epsilon": 0.001,
+      "iteration": 0,
+      "result": "SAT",
+      "verify_time_s": 0.017759084701538086,
+      "train_loss": 9.224004474097382e-08,
+      "n_augmented_total": 0,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.485188007354736
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 1,
+      "result": "SAT",
+      "verify_time_s": 0.017889976501464844,
+      "train_loss": 8.793279824962517e-08,
+      "n_augmented_total": 101,
+      "n_added_this_iter": 101,
+      "wall_time_s": 19.124184131622314
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 2,
+      "result": "SAT",
+      "verify_time_s": 0.020055055618286133,
+      "train_loss": 4.819480404902069e-08,
+      "n_augmented_total": 202,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.73975110054016
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 3,
+      "result": "SAT",
+      "verify_time_s": 0.025500059127807617,
+      "train_loss": 4.344266956996473e-08,
+      "n_augmented_total": 303,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.455999851226807
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 4,
+      "result": "SAT",
+      "verify_time_s": 0.09429287910461426,
+      "train_loss": 4.851044216888363e-08,
+      "n_augmented_total": 404,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.59027671813965
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 5,
+      "result": "SAT",
+      "verify_time_s": 0.01754450798034668,
+      "train_loss": 3.842964936933372e-08,
+      "n_augmented_total": 505,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.823086977005005
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 6,
+      "result": "SAT",
+      "verify_time_s": 0.06807184219360352,
+      "train_loss": 3.653915584271442e-08,
+      "n_augmented_total": 606,
+      "n_added_this_iter": 101,
+      "wall_time_s": 19.267133951187134
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 7,
+      "result": "SAT",
+      "verify_time_s": 0.1928551197052002,
+      "train_loss": 3.471650399165709e-08,
+      "n_augmented_total": 707,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.691736936569214
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 8,
+      "result": "SAT",
+      "verify_time_s": 0.06071829795837402,
+      "train_loss": 3.096474111856138e-08,
+      "n_augmented_total": 808,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.583590269088745
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 9,
+      "result": "SAT",
+      "verify_time_s": 0.16315126419067383,
+      "train_loss": 2.99918114699624e-08,
+      "n_augmented_total": 909,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.444029092788696
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 10,
+      "result": "SAT",
+      "verify_time_s": 0.29627299308776855,
+      "train_loss": 3.1139577353129505e-08,
+      "n_augmented_total": 1010,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.779178857803345
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 11,
+      "result": "SAT",
+      "verify_time_s": 0.2511422634124756,
+      "train_loss": 2.934640256461757e-08,
+      "n_augmented_total": 1111,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.671825885772705
+    },
+    {
+      "epsilon": 0.001,
+      "iteration": 12,
+      "result": "UNSAT",
+      "verify_time_s": 0.21222138404846191,
+      "train_loss": 2.629068944706883e-08,
+      "n_augmented_total": 1212,
+      "n_added_this_iter": 0,
+      "wall_time_s": 18.844290018081665
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 0,
+      "result": "SAT",
+      "verify_time_s": 0.15703034400939941,
+      "train_loss": 3.111565886669151e-08,
+      "n_augmented_total": 1212,
+      "n_added_this_iter": 101,
+      "wall_time_s": 24.472261667251587
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 1,
+      "result": "SAT",
+      "verify_time_s": 0.16630005836486816,
+      "train_loss": 2.5426655460535945e-08,
+      "n_augmented_total": 1313,
+      "n_added_this_iter": 101,
+      "wall_time_s": 19.62804102897644
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 2,
+      "result": "SAT",
+      "verify_time_s": 0.013380765914916992,
+      "train_loss": 2.610406292080886e-08,
+      "n_augmented_total": 1414,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.916105031967163
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 3,
+      "result": "SAT",
+      "verify_time_s": 0.03292226791381836,
+      "train_loss": 2.6100792076861573e-08,
+      "n_augmented_total": 1515,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.68452787399292
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 4,
+      "result": "SAT",
+      "verify_time_s": 0.0478208065032959,
+      "train_loss": 2.8041907411997207e-08,
+      "n_augmented_total": 1616,
+      "n_added_this_iter": 101,
+      "wall_time_s": 19.3049738407135
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 5,
+      "result": "SAT",
+      "verify_time_s": 0.011106014251708984,
+      "train_loss": 2.663966226576626e-08,
+      "n_augmented_total": 1717,
+      "n_added_this_iter": 101,
+      "wall_time_s": 19.17145586013794
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 6,
+      "result": "SAT",
+      "verify_time_s": 0.04392290115356445,
+      "train_loss": 2.517032873310462e-08,
+      "n_augmented_total": 1818,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.7392520904541
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 7,
+      "result": "SAT",
+      "verify_time_s": 0.019467830657958984,
+      "train_loss": 2.5197141600570665e-08,
+      "n_augmented_total": 1919,
+      "n_added_this_iter": 101,
+      "wall_time_s": 19.97693109512329
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 8,
+      "result": "SAT",
+      "verify_time_s": 0.22264790534973145,
+      "train_loss": 2.2787064569384198e-08,
+      "n_augmented_total": 2020,
+      "n_added_this_iter": 101,
+      "wall_time_s": 19.677819967269897
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 9,
+      "result": "SAT",
+      "verify_time_s": 0.11178207397460938,
+      "train_loss": 1.81747522296037e-08,
+      "n_augmented_total": 2121,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.93940305709839
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 10,
+      "result": "SAT",
+      "verify_time_s": 0.11397290229797363,
+      "train_loss": 1.8689431521040027e-08,
+      "n_augmented_total": 2222,
+      "n_added_this_iter": 101,
+      "wall_time_s": 18.916805028915405
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 11,
+      "result": "SAT",
+      "verify_time_s": 0.03227400779724121,
+      "train_loss": 1.927246893522624e-08,
+      "n_augmented_total": 2323,
+      "n_added_this_iter": 101,
+      "wall_time_s": 20.303853750228882
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 12,
+      "result": "SAT",
+      "verify_time_s": 0.07412075996398926,
+      "train_loss": 1.625594708548597e-08,
+      "n_augmented_total": 2424,
+      "n_added_this_iter": 101,
+      "wall_time_s": 20.769731044769287
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 13,
+      "result": "SAT",
+      "verify_time_s": 0.01942276954650879,
+      "train_loss": 1.8731682261634825e-08,
+      "n_augmented_total": 2525,
+      "n_added_this_iter": 101,
+      "wall_time_s": 19.175410985946655
+    },
+    {
+      "epsilon": 0.0001,
+      "iteration": 14,
+      "result": "SAT",
+      "verify_time_s": 0.04836297035217285,
+      "train_loss": 1.7288753564920446e-08,
+      "n_augmented_total": 2626,
+      "n_added_this_iter": 101,
+      "wall_time_s": 20.180709838867188
+    }
+  ],
+  "final_epsilon_unsat": 0.001,
+  "n_original_train": 70000
+}

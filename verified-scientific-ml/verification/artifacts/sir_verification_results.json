@@ -1,0 +1,728 @@
+{
+  "model_a": [
+    {
+      "name": "mlp_population_eps_1.0",
+      "description": "|P_next - P| <= 1.0 for all states in D (Model A, MLP)",
+      "epsilon": 1.0,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.01040792465209961,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.0064580440521240234,
+        "marabou_time_seconds": 0.003512,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.003949880599975586,
+        "marabou_time_seconds": 0.003483,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "mlp_population_eps_0.1",
+      "description": "|P_next - P| <= 0.1 for all states in D (Model A, MLP)",
+      "epsilon": 0.1,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.01981806755065918,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.00974583625793457,
+        "marabou_time_seconds": 0.009302,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.01007223129272461,
+        "marabou_time_seconds": 0.009643,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "mlp_population_eps_1e-02",
+      "description": "|P_next - P| <= 1e-02 for all states in D (Model A, MLP)",
+      "epsilon": 0.01,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "SAT",
+      "verification_time_seconds": 0.007721662521362305,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "SAT",
+        "verification_time_seconds": 0.003907680511474609,
+        "marabou_time_seconds": 0.003493,
+        "counterexample": {
+          "input_state": [
+            0.27398340567411755,
+            0.6,
+            0.10601659432588244
+          ],
+          "predicted_next_state": [
+            0.23141324991018897,
+            0.5715954819483496,
+            0.21398074341660558
+          ],
+          "population_before": 0.98,
+          "population_after": 1.0169894752751443,
+          "population_error": 0.03698947527514429
+        }
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "SAT",
+        "verification_time_seconds": 0.0038139820098876953,
+        "marabou_time_seconds": 0.003416,
+        "counterexample": {
+          "input_state": [
+            0.23334679881774778,
+            0.5544487727830941,
+            0.2234203382331353
+          ],
+          "predicted_next_state": [
+            0.18655945701794763,
+            0.5441493608508153,
+            0.27050709196521466
+          ],
+          "population_before": 1.0112159098339772,
+          "population_after": 1.0012159098339777,
+          "population_error": -0.009999999999999565
+        }
+      },
+      "counterexample": {
+        "input_state": [
+          0.27398340567411755,
+          0.6,
+          0.10601659432588244
+        ],
+        "predicted_next_state": [
+          0.23141324991018897,
+          0.5715954819483496,
+          0.21398074341660558
+        ],
+        "population_before": 0.98,
+        "population_after": 1.0169894752751443,
+        "population_error": 0.03698947527514429
+      }
+    },
+    {
+      "name": "mlp_population_eps_1e-03",
+      "description": "|P_next - P| <= 1e-03 for all states in D (Model A, MLP)",
+      "epsilon": 0.001,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "SAT",
+      "verification_time_seconds": 0.007334232330322266,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "SAT",
+        "verification_time_seconds": 0.003704071044921875,
+        "marabou_time_seconds": 0.003313,
+        "counterexample": {
+          "input_state": [
+            0.27398340567411755,
+            0.6,
+            0.10601659432588248
+          ],
+          "predicted_next_state": [
+            0.23141324991018872,
+            0.5715954819483496,
+            0.21398074341660572
+          ],
+          "population_before": 0.9800000000000001,
+          "population_after": 1.016989475275144,
+          "population_error": 0.03698947527514396
+        }
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "SAT",
+        "verification_time_seconds": 0.0036301612854003906,
+        "marabou_time_seconds": 0.003244,
+        "counterexample": {
+          "input_state": [
+            0.23416977408009979,
+            0.55171721552066,
+            0.215239794529071
+          ],
+          "predicted_next_state": [
+            0.1865558061832125,
+            0.5442743371870986,
+            0.26929664075951976
+          ],
+          "population_before": 1.0011267841298308,
+          "population_after": 1.0001267841298307,
+          "population_error": -0.001000000000000112
+        }
+      },
+      "counterexample": {
+        "input_state": [
+          0.27398340567411755,
+          0.6,
+          0.10601659432588248
+        ],
+        "predicted_next_state": [
+          0.23141324991018872,
+          0.5715954819483496,
+          0.21398074341660572
+        ],
+        "population_before": 0.9800000000000001,
+        "population_after": 1.016989475275144,
+        "population_error": 0.03698947527514396
+      }
+    },
+    {
+      "name": "mlp_population_eps_1e-04",
+      "description": "|P_next - P| <= 1e-04 for all states in D (Model A, MLP)",
+      "epsilon": 0.0001,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "SAT",
+      "verification_time_seconds": 0.00724482536315918,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "SAT",
+        "verification_time_seconds": 0.003638744354248047,
+        "marabou_time_seconds": 0.003244,
+        "counterexample": {
+          "input_state": [
+            0.2739834056741175,
+            0.6,
+            0.1060165943258825
+          ],
+          "predicted_next_state": [
+            0.23141324991018883,
+            0.5715954819483496,
+            0.2139807434166057
+          ],
+          "population_before": 0.98,
+          "population_after": 1.0169894752751443,
+          "population_error": 0.03698947527514429
+        }
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "SAT",
+        "verification_time_seconds": 0.003606081008911133,
+        "marabou_time_seconds": 0.003225,
+        "counterexample": {
+          "input_state": [
+            0.234252071606335,
+            0.5514440597944167,
+            0.21442174015866464
+          ],
+          "predicted_next_state": [
+            0.18655544109973898,
+            0.5442868348207268,
+            0.26917559563895016
+          ],
+          "population_before": 1.0001178715594163,
+          "population_after": 1.000017871559416,
+          "population_error": -0.00010000000000043308
+        }
+      },
+      "counterexample": {
+        "input_state": [
+          0.2739834056741175,
+          0.6,
+          0.1060165943258825
+        ],
+        "predicted_next_state": [
+          0.23141324991018883,
+          0.5715954819483496,
+          0.2139807434166057
+        ],
+        "population_before": 0.98,
+        "population_after": 1.0169894752751443,
+        "population_error": 0.03698947527514429
+      }
+    }
+  ],
+  "model_b": [
+    {
+      "name": "geometric_population_eps_1.0",
+      "description": "|P_next - P| <= 1.0 for all states in D (Model B, geometric)",
+      "epsilon": 1.0,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.00537419319152832,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.002701997756958008,
+        "marabou_time_seconds": 0.002321,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.0026721954345703125,
+        "marabou_time_seconds": 0.002294,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "geometric_population_eps_1e-02",
+      "description": "|P_next - P| <= 1e-02 for all states in D (Model B, geometric)",
+      "epsilon": 0.01,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.005339384078979492,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.002686023712158203,
+        "marabou_time_seconds": 0.002288,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.002653360366821289,
+        "marabou_time_seconds": 0.002277,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "geometric_population_eps_1e-04",
+      "description": "|P_next - P| <= 1e-04 for all states in D (Model B, geometric)",
+      "epsilon": 0.0001,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.005499839782714844,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.002665996551513672,
+        "marabou_time_seconds": 0.002277,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.002833843231201172,
+        "marabou_time_seconds": 0.002458,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "geometric_population_eps_1e-05",
+      "description": "|P_next - P| <= 1e-05 for all states in D (Model B, geometric)",
+      "epsilon": 1e-05,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.005589962005615234,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.0028319358825683594,
+        "marabou_time_seconds": 0.002372,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.002758026123046875,
+        "marabou_time_seconds": 0.002351,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "geometric_population_eps_1e-06",
+      "description": "|P_next - P| <= 1e-06 for all states in D (Model B, geometric)",
+      "epsilon": 1e-06,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.00549006462097168,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.0027649402618408203,
+        "marabou_time_seconds": 0.002367,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.0027251243591308594,
+        "marabou_time_seconds": 0.002338,
+        "counterexample": null
+      },
+      "counterexample": null
+    }
+  ],
+  "model_c": [
+    {
+      "name": "soft_geometric_population_eps_1.0",
+      "description": "|P_next - P| <= 1.0 for all states in D (Model C, soft-geometric)",
+      "epsilon": 1.0,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.0054967403411865234,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.002753019332885742,
+        "marabou_time_seconds": 0.002358,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.0027437210083007812,
+        "marabou_time_seconds": 0.002348,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "soft_geometric_population_eps_0.1",
+      "description": "|P_next - P| <= 0.1 for all states in D (Model C, soft-geometric)",
+      "epsilon": 0.1,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.0054779052734375,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.0027420520782470703,
+        "marabou_time_seconds": 0.00235,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.0027358531951904297,
+        "marabou_time_seconds": 0.002342,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "soft_geometric_population_eps_1e-02",
+      "description": "|P_next - P| <= 1e-02 for all states in D (Model C, soft-geometric)",
+      "epsilon": 0.01,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "UNSAT",
+      "verification_time_seconds": 0.017457962036132812,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.009473085403442383,
+        "marabou_time_seconds": 0.009081,
+        "counterexample": null
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "UNSAT",
+        "verification_time_seconds": 0.00798487663269043,
+        "marabou_time_seconds": 0.007494,
+        "counterexample": null
+      },
+      "counterexample": null
+    },
+    {
+      "name": "soft_geometric_population_eps_1e-03",
+      "description": "|P_next - P| <= 1e-03 for all states in D (Model C, soft-geometric)",
+      "epsilon": 0.001,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "SAT",
+      "verification_time_seconds": 0.012529850006103516,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "SAT",
+        "verification_time_seconds": 0.004703998565673828,
+        "marabou_time_seconds": 0.004242,
+        "counterexample": {
+          "input_state": [
+            0.10840363319862181,
+            0.44113886203221975,
+            0.43045750476916395
+          ],
+          "predicted_next_state": [
+            0.09577923295025671,
+            0.41234623915467816,
+            0.47287452789507073
+          ],
+          "population_before": 0.9800000000000055,
+          "population_after": 0.9810000000000056,
+          "population_error": 0.001000000000000112
+        }
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "SAT",
+        "verification_time_seconds": 0.007825851440429688,
+        "marabou_time_seconds": 0.007373,
+        "counterexample": {
+          "input_state": [
+            0.4880299980362804,
+            0.5195845113230947,
+            0.012385490640626048
+          ],
+          "predicted_next_state": [
+            0.4230855617279105,
+            0.5323375998604859,
+            0.06357683841160222
+          ],
+          "population_before": 1.0200000000000011,
+          "population_after": 1.0189999999999986,
+          "population_error": -0.0010000000000025544
+        }
+      },
+      "counterexample": {
+        "input_state": [
+          0.10840363319862181,
+          0.44113886203221975,
+          0.43045750476916395
+        ],
+        "predicted_next_state": [
+          0.09577923295025671,
+          0.41234623915467816,
+          0.47287452789507073
+        ],
+        "population_before": 0.9800000000000055,
+        "population_after": 0.9810000000000056,
+        "population_error": 0.001000000000000112
+      }
+    },
+    {
+      "name": "soft_geometric_population_eps_1e-04",
+      "description": "|P_next - P| <= 1e-04 for all states in D (Model C, soft-geometric)",
+      "epsilon": 0.0001,
+      "domain_lower": [
+        0.05,
+        0.01,
+        0.01
+      ],
+      "domain_upper": [
+        0.95,
+        0.6,
+        0.9
+      ],
+      "separation_bound": 0.02,
+      "expected": "UNSAT",
+      "result": "SAT",
+      "verification_time_seconds": 0.016234874725341797,
+      "upper_violation_query": {
+        "direction": "upper",
+        "result": "SAT",
+        "verification_time_seconds": 0.011536836624145508,
+        "marabou_time_seconds": 0.011042,
+        "counterexample": {
+          "input_state": [
+            0.15120941999222778,
+            0.4646463049363827,
+            0.4041442750713907
+          ],
+          "predicted_next_state": [
+            0.13062045324681357,
+            0.4400639884088341,
+            0.44941555834435315
+          ],
+          "population_before": 1.0200000000000014,
+          "population_after": 1.020100000000001,
+          "population_error": 9.99999999995449e-05
+        }
+      },
+      "lower_violation_query": {
+        "direction": "lower",
+        "result": "SAT",
+        "verification_time_seconds": 0.004698038101196289,
+        "marabou_time_seconds": 0.00412,
+        "counterexample": {
+          "input_state": [
+            0.5862385149152547,
+            0.38376148508475166,
+            0.01
+          ],
+          "predicted_next_state": [
+            0.5231309671056671,
+            0.4069428161923274,
+            0.049771994256421766
+          ],
+          "population_before": 0.9800000000000064,
+          "population_after": 0.9798457775544163,
+          "population_error": -0.00015422244559015752
+        }
+      },
+      "counterexample": {
+        "input_state": [
+          0.15120941999222778,
+          0.4646463049363827,
+          0.4041442750713907
+        ],
+        "predicted_next_state": [
+          0.13062045324681357,
+          0.4400639884088341,
+          0.44941555834435315
+        ],
+        "population_before": 1.0200000000000014,
+        "population_after": 1.020100000000001,
+        "population_error": 9.99999999995449e-05
+      }
+    }
+  ]
+}

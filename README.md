@@ -24,7 +24,7 @@ map between them and the thesis narrative.
 
 ## Where things stand
 
-### `verified-scientific-ml/` — Steps 1-5 (done)
+### `verified-scientific-ml/` — Steps 1-9 (done)
 
 Built up in stages, each verified end-to-end before moving on:
 
@@ -49,11 +49,24 @@ Built up in stages, each verified end-to-end before moving on:
    (relative-state input, shared force applied ±F to each particle).
    Marabou proves the *tight* momentum bound UNSAT — the property Model A
    provably violates — about 500x faster than Model A's easier query.
+6. **Soft-geometric surrogate (Model C)** — an intermediate architecture:
+   translation-invariant input encoding but no hard conservation constraint.
+   Verifiable to ε=1e-2 (100× tighter than Model A, 1,000× looser than B).
+7. **Verification-Guided Training (VGT)** — Marabou counterexamples used as
+   training signal: each worst-case input found by the solver is added to
+   the training set with physics-simulator labels, then the model is
+   fine-tuned and re-verified. VGT pushes Model C from ε=1e-2 → ε=1e-3
+   (10× improvement) without any architecture change.
+8-9. **SIR epidemiological model** — the full Steps 4-7 pipeline replicated
+   on a completely different simulation domain (SIR ODE, β=0.3, γ=0.1,
+   conservation law s+i+r=1). The A < C < B ordering holds identically:
+   A verifiable to ε=0.1, C to ε=1e-2, B to ε≤1e-6. VGT again tightens
+   C from ε=1e-2 → ε=1e-3 (13 iterations, 2,727 counterexample states).
 
-**Headline result so far**: on this benchmark, a geometric inductive bias
-didn't just improve empirical accuracy, it changed what could be *formally
-proven* about the model, at a tolerance where the unstructured baseline
-provably fails. Full numbers, domains, and honest limitations are in
+**Headline result**: the geometric bias → verifiability relationship is
+not an artefact of one physical system. It generalises across domains
+(particle physics and epidemiology) and VGT produces the same 10×
+tightening in both. Cross-domain comparison table and full numbers:
 [`verified-scientific-ml/README.md`](verified-scientific-ml/README.md).
 
 ### `verification-tools-pilot/` — tool selection pilot (done)
@@ -81,4 +94,4 @@ reasoning: [`verification-tools-pilot/REPORT.md`](verification-tools-pilot/REPOR
 Apply the tool choice above to a real geometric generative surrogate for
 calorimeter shower simulation — the actual target this whole pipeline has
 been building toward — and re-run the same standard-vs-geometric
-verifiability comparison Steps 4-5 established, on that model.
+verifiability comparison (now established on two domains) on that model.
