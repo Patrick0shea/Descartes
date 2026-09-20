@@ -1,4 +1,4 @@
-# Thesis: Formal Verification of Geometric Deep Learning for Scientific Simulation
+# Descartes: Formal Verification of Geometric Deep Learning for Scientific Simulation
 
 **Research question**: does building geometric/physical inductive biases into
 a neural scientific simulator make it more amenable to *formal*
@@ -16,11 +16,11 @@ verification tools on a toy version of the real target.
 
 | Folder | What it is |
 |---|---|
-| [`verified-scientific-ml/`](verified-scientific-ml/) | The main thesis pipeline (Steps 1-5, see below): physics simulators, trained neural surrogates, and formal verification of their properties with [Marabou](https://github.com/NeuralNetworkVerification/Marabou). |
+| [`verified-scientific-ml/`](verified-scientific-ml/) | The main pipeline (Steps 1-5, see below): physics simulators, trained neural surrogates, and formal verification of their properties with [Marabou](https://github.com/NeuralNetworkVerification/Marabou). |
 | [`verification-tools-pilot/`](verification-tools-pilot/) | A separate, self-contained pilot comparing verification tools (`auto_LiRPA`, `alpha-beta-CROWN`, `Marabou`) on a toy latent-to-grid generator shaped like the real calorimeter-shower target, to decide which tool to commit to before building that model for real. |
 
 Each has its own README with setup/run instructions. This file is just the
-map between them and the thesis narrative.
+map between them and the overall narrative.
 
 ## Where things stand
 
