@@ -1,0 +1,22 @@
+# Core
+torch>=2.0
+numpy
+scipy
+pyyaml
+pytest
+
+# auto_LiRPA: PyPI package is stale (pins torch<1.13).
+# Install from source:
+#   pip install --no-deps "git+https://github.com/Verified-Intelligence/auto_LiRPA.git"
+#   pip install appdirs graphviz tqdm packaging
+appdirs
+graphviz
+tqdm
+packaging
+
+# Marabou (ships a prebuilt wheel with C++ solver included)
+maraboupy
+
+# ONNX (needed for Marabou backend)
+onnx
+onnxruntime
