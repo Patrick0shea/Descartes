@@ -28,11 +28,11 @@ VGT tightens Model C a further 10× on both domains (ε=1e-2 → ε=1e-3).
 |---|---|
 | [`verifier/`](verifier/) | Core framework: ModelSpec, Property (NonNegativity, Conservation, RangeBound), LiRPA and Marabou backends, runner, PGD falsifier. |
 | [`case_studies/`](case_studies/) | Per-domain pipelines: `calorimeter/` (CaloChallenge Dataset 1, deep case study) and `sir_spring/` (generality test, wraps existing trained models). |
-| [`tests/`](tests/) | Framework unit tests — 82 passing. |
+| [`tests/`](tests/) | Framework unit tests — 99 passing. |
 | [`results/`](results/) | JSON results written here per domain (`results/<domain>/<run_id>.json`). |
 | [`verified-scientific-ml/`](verified-scientific-ml/) | Supporting experiment: simulators, trained surrogates (Models A/B/C), Marabou epsilon sweeps, VGT loop — particle system and SIR domains. |
 | [`verification-tools-pilot/`](verification-tools-pilot/) | Tool selection pilot comparing `auto_LiRPA`, `alpha-beta-CROWN`, and `Marabou` on a toy grid generator. Recommends auto_LiRPA primary, Marabou for spot-checks. |
 
 ## What's next
 
-Step 5: Calorimeter properties (non-negativity, energy consistency) — run full verification on the trained generator, report PROVEN / COUNTEREXAMPLE / INCONCLUSIVE.
+Step 6: Port SIR and spring models through the same interfaces, compare against earlier Marabou results.
