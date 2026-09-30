@@ -28,11 +28,11 @@ VGT tightens Model C a further 10× on both domains (ε=1e-2 → ε=1e-3).
 |---|---|
 | [`verifier/`](verifier/) | Core framework: ModelSpec, Property (NonNegativity, Conservation, RangeBound), LiRPA and Marabou backends, runner, PGD falsifier. |
 | [`case_studies/`](case_studies/) | Per-domain pipelines: `calorimeter/` (CaloChallenge Dataset 1, deep case study) and `sir_spring/` (generality test, wraps existing trained models). |
-| [`tests/`](tests/) | Framework unit tests — 121 passing. |
+| [`tests/`](tests/) | Framework unit tests — 143 passing. |
 | [`results/`](results/) | JSON results written here per domain (`results/<domain>/<run_id>.json`). |
 | [`verified-scientific-ml/`](verified-scientific-ml/) | Supporting experiment: simulators, trained surrogates (Models A/B/C), Marabou epsilon sweeps, VGT loop — particle system and SIR domains. |
 | [`verification-tools-pilot/`](verification-tools-pilot/) | Tool selection pilot comparing `auto_LiRPA`, `alpha-beta-CROWN`, and `Marabou` on a toy grid generator. Recommends auto_LiRPA primary, Marabou for spot-checks. |
 
 ## What's next
 
-Step 7: PGD falsification baseline — attack Models A/B/C on both domains and compare against the LiRPA/Marabou verification bounds.
+All steps complete. The framework covers PGD falsification (Step 7), Marabou spot-checks cross-validating LiRPA results (Step 8), and architecture variant experiments showing how the final ReLU enables formal non-negativity proofs.
