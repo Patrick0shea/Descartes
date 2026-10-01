@@ -1,0 +1,40 @@
+{
+  "status": "PROVEN",
+  "property_name": "total_energy_upper_bound",
+  "backend": "lirpa",
+  "bound_proven": 443.3682556152344,
+  "counterexample": null,
+  "input_lb": [
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    0.0
+  ],
+  "input_ub": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    9.704060554504395
+  ],
+  "runtime_s": 0.015231499972287565,
+  "model_name": "calo_generator_real_n368",
+  "notes": "CROWN bounds [-5.444303, 443.368256] fit range",
+  "checkpoint_path": "/Users/patrickoshea/thesis1/case_studies/calorimeter/models/checkpoints/calo_generator_real.pt",
+  "checkpoint_hash": "ae0951f16df88506",
+  "git_commit": "709ee25",
+  "seed": 42,
+  "timestamp": "2026-10-01T13:37:39.666265+00:00",
+  "config": {
+    "method": "CROWN"
+  }
+}

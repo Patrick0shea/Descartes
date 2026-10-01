@@ -1,0 +1,40 @@
+{
+  "status": "INCONCLUSIVE",
+  "property_name": "energy_conservation",
+  "backend": "lirpa",
+  "bound_proven": null,
+  "counterexample": null,
+  "input_lb": [
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    0.0
+  ],
+  "input_ub": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    9.704060554504395
+  ],
+  "runtime_s": 0.014958542014937848,
+  "model_name": "calo_generator_real_n368",
+  "notes": "CROWN sum bounds [-5.444303, 443.368256] do not fit [216.717876, 221.206076]; relaxation too loose to prove conservation",
+  "checkpoint_path": "/Users/patrickoshea/thesis1/case_studies/calorimeter/models/checkpoints/calo_generator_real.pt",
+  "checkpoint_hash": "ae0951f16df88506",
+  "git_commit": "709ee25",
+  "seed": 42,
+  "timestamp": "2026-10-01T13:37:39.837285+00:00",
+  "config": {
+    "method": "CROWN"
+  }
+}

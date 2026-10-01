@@ -101,23 +101,27 @@ class TestMarabouConservation:
 
 
 class TestMarabouReLUEndingNetwork:
-    """Regression test for Marabou outputVars pre/post-ReLU bug.
+    """Regression test for Marabou non-negativity false positive.
 
-    Before the _GemmTail fix, Marabou's outputVars pointed to the pre-ReLU
-    variable for networks whose last ONNX op is Relu.  This caused a
-    non-negativity query on a ReLU-ending network to return COUNTEREXAMPLE
-    (the pre-ReLU value can go negative) instead of PROVEN.
+    Root cause: Marabou's SAT tolerance (~1e-5) caused it to return SAT
+    with output = 0.0 (the post-ReLU boundary) when the query threshold
+    was -1e-9, because the solver accepted 0.0 as satisfying <= -1e-9
+    within floating-point precision.
 
-    The _GemmTail identity wrapper appended before ONNX export ensures the
-    final op is always Gemm, so outputVars correctly refers to post-ReLU
-    values.
+    Fix: threshold raised to -1e-5 (outside Marabou's precision) and a
+    secondary CE verification step checks any SAT result against the
+    PyTorch model to discard numerical artifacts.
+
+    Note: Marabou correctly maps outputVars to post-ReLU variables (the
+    ReLU pair (b, f) has f = outputVars[i]); the bug was numerical, not
+    structural.
     """
 
     def test_relu_ending_nonneg_proven(self, nonneg_model, bounds_unit_square):
         """
         2->4->2 network with final ReLU: outputs are always >= 0.
         Marabou must return PROVEN, not COUNTEREXAMPLE.
-        This was broken before the _GemmTail fix.
+        Was broken before the numerical-tolerance fix.
         """
         from verifier import ModelSpec
         lb, ub = bounds_unit_square
