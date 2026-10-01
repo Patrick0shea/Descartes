@@ -132,6 +132,6 @@ class TestMarabouReLUEndingNetwork:
         backend = MarabouBackend()
         result = backend.verify(spec, NonNegativity(), CONFIG)
         assert result.status == "PROVEN", (
-            f"ReLU-ending network must be PROVEN (outputVars bug fixed), got "
+            f"ReLU-ending network must be PROVEN (numerical-tolerance fix), got "
             f"{result.status}: {result.notes}"
         )

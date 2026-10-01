@@ -38,9 +38,9 @@ import torch.nn as nn
 
 # ── constants ────────────────────────────────────────────────────────────────
 
-E_MIN_MEV: float = 256.0          # minimum incident energy in the dataset
-E_MAX_MEV: float = 4096.0         # maximum for the [0,1] energy range used in spike
-LOG_E_MAX: float = math.log(E_MAX_MEV / E_MIN_MEV)   # ≈ 2.773
+E_MIN_MEV: float = 256.0           # minimum incident energy in the dataset
+E_MAX_MEV: float = 4_194_304.0    # maximum: 2^14 × E_MIN_MEV = 4 TeV (real data range)
+LOG_E_MAX: float = math.log(E_MAX_MEV / E_MIN_MEV)   # ≈ 9.704
 
 Z_DIM: int = 8                     # latent dimension
 INPUT_DIM: int = Z_DIM + 1        # z_dim + log_energy scalar

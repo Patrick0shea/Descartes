@@ -118,7 +118,8 @@ class TestInputBounds:
         assert abs(ub[Z_DIM] - LOG_E_MAX) < 1e-6
 
     def test_log_e_max_value(self):
-        assert abs(LOG_E_MAX - math.log(4096.0 / 256.0)) < 1e-6
+        # E_MAX_MEV = 4_194_304 MeV (2^14 × E_MIN_MEV = 4 TeV, real data range)
+        assert abs(LOG_E_MAX - math.log(4_194_304.0 / 256.0)) < 1e-6
 
 
 # ── encode_input / decode_energy tests ───────────────────────────────────────
@@ -140,7 +141,7 @@ class TestHelpers:
 
     def test_encode_log_energy_at_e_max(self):
         z = torch.zeros(1, Z_DIM)
-        e = torch.tensor([4096.0])
+        e = torch.tensor([4_194_304.0])   # actual E_MAX_MEV (4 TeV)
         x = encode_input(z, e)
         assert abs(x[0, Z_DIM].item() - LOG_E_MAX) < 1e-5
 
