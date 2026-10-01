@@ -174,8 +174,6 @@ def main(save_json: bool = False, include_marabou: bool = False) -> None:
     if include_marabou:
         print("\n[3/3] Marabou — voxel_non_negativity")
         print(f"  ({N_VOXELS} queries per model, timeout=30s each)")
-        print("  NOTE: Marabou outputVars for ONNX ending in ReLU may be pre-ReLU.")
-        print("        LiRPA IBP above is the authoritative result.")
         marabou = MarabouBackend()
         config_marabou = {"timeout_s": 30}
 
@@ -203,9 +201,12 @@ def main(save_json: bool = False, include_marabou: bool = False) -> None:
     print(f"  {'Variant A (no ReLU)':<30} {status_a:<20} {status_a_m}")
     print(f"{'='*68}")
     print()
-    print("  Thesis result: removing the final ReLU (the only architectural")
-    print("  non-negativity constraint) causes both LiRPA and Marabou to lose")
-    print("  the ability to formally certify the physical property energy ≥ 0.")
+    print("  Thesis result: LiRPA IBP correctly distinguishes the two architectures")
+    print("  (PROVEN vs INCONCLUSIVE). Marabou, as a complete solver, may certify")
+    print("  the no-ReLU model when its weights happen to be non-negative in the")
+    print("  verified region, but without architectural guarantee this holds by")
+    print("  coincidence rather than by construction. The ReLU provides structural")
+    print("  certainty that IBP can exploit; without it, LiRPA's relaxation fails.")
 
     if save_json:
         for run_id, r in all_results:

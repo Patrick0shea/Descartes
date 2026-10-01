@@ -1,0 +1,40 @@
+{
+  "status": "PROVEN",
+  "property_name": "voxel_non_negativity",
+  "backend": "marabou",
+  "bound_proven": 0.0,
+  "counterexample": null,
+  "input_lb": [
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    0.0
+  ],
+  "input_ub": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    2.7725887298583984
+  ],
+  "runtime_s": 2.8545155830215663,
+  "model_name": "calo_variant_relu",
+  "notes": "All 16 outputs proven >= 0 (UNSAT for all queries)",
+  "checkpoint_path": "/private/var/folders/_v/mm3168qn0nnghb6j445xnhtr0000gn/T/tmpmrv7vjdq.pt",
+  "checkpoint_hash": "cc23c95614a5b55c",
+  "git_commit": "43b83cc",
+  "seed": 42,
+  "timestamp": "2026-10-01T10:15:26.980588+00:00",
+  "config": {
+    "timeout_s": 30
+  }
+}

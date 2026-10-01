@@ -1,0 +1,40 @@
+{
+  "status": "INCONCLUSIVE",
+  "property_name": "voxel_non_negativity",
+  "backend": "lirpa",
+  "bound_proven": null,
+  "counterexample": null,
+  "input_lb": [
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    -1.0,
+    0.0
+  ],
+  "input_ub": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    2.7725887298583984
+  ],
+  "runtime_s": 0.014187791966833174,
+  "model_name": "calo_variant_norelu",
+  "notes": "CROWN min output lower bound = -5.483253 < 0; relaxation too loose to prove non-negativity",
+  "checkpoint_path": "/private/var/folders/_v/mm3168qn0nnghb6j445xnhtr0000gn/T/tmp3gn3jkuy.pt",
+  "checkpoint_hash": "d409780929e0adb8",
+  "git_commit": "43b83cc",
+  "seed": 42,
+  "timestamp": "2026-10-01T10:15:23.864639+00:00",
+  "config": {
+    "method": "IBP"
+  }
+}

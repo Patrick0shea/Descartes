@@ -98,3 +98,36 @@ class TestMarabouConservation:
         result = backend.verify(spec, prop, CONFIG)
         assert result.status == "COUNTEREXAMPLE", result.notes
         assert result.counterexample is not None
+
+
+class TestMarabouReLUEndingNetwork:
+    """Regression test for Marabou outputVars pre/post-ReLU bug.
+
+    Before the _GemmTail fix, Marabou's outputVars pointed to the pre-ReLU
+    variable for networks whose last ONNX op is Relu.  This caused a
+    non-negativity query on a ReLU-ending network to return COUNTEREXAMPLE
+    (the pre-ReLU value can go negative) instead of PROVEN.
+
+    The _GemmTail identity wrapper appended before ONNX export ensures the
+    final op is always Gemm, so outputVars correctly refers to post-ReLU
+    values.
+    """
+
+    def test_relu_ending_nonneg_proven(self, nonneg_model, bounds_unit_square):
+        """
+        2->4->2 network with final ReLU: outputs are always >= 0.
+        Marabou must return PROVEN, not COUNTEREXAMPLE.
+        This was broken before the _GemmTail fix.
+        """
+        from verifier import ModelSpec
+        lb, ub = bounds_unit_square
+        spec = ModelSpec(
+            model=nonneg_model, input_lb=lb, input_ub=ub,
+            name="relu_ending_regression"
+        )
+        backend = MarabouBackend()
+        result = backend.verify(spec, NonNegativity(), CONFIG)
+        assert result.status == "PROVEN", (
+            f"ReLU-ending network must be PROVEN (outputVars bug fixed), got "
+            f"{result.status}: {result.notes}"
+        )

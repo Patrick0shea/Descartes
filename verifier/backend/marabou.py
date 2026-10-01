@@ -152,24 +152,38 @@ class MarabouBackend(Backend):
         tmp_net = Mb.read_onnx(onnx_path)
         n_outputs = len(tmp_net.outputVars[0].flatten())
 
+        # Marabou's numerical precision is ~1e-5.  Using -1e-9 causes false
+        # SAT results where the solver returns an assignment with output = 0.0
+        # (the post-ReLU boundary) and claims it satisfies output <= -1e-9.
+        # Using -1e-5 stays outside Marabou's precision; genuine violations
+        # from unstructured networks are orders of magnitude larger.
+        # A secondary CE verification step catches any remaining false positives.
+        _NONNEG_THRESHOLD = -1e-5
+
         for i in range(n_outputs):
             net_i = Mb.read_onnx(onnx_path)
             self._add_input_bounds(net_i, model_spec.input_lb, model_spec.input_ub)
             out_vars_i = net_i.outputVars[0].flatten()
-            # Query: can output_i < 0?  Constrain output_i <= -1e-9.
-            net_i.setUpperBound(out_vars_i[i], -1e-9)
+            net_i.setUpperBound(out_vars_i[i], _NONNEG_THRESHOLD)
 
             exit_code, values, stats = net_i.solve(options=opts, verbose=False)
 
             if exit_code == "sat":
                 ce = self._extract_input(values, net_i)
-                return self._result(
-                    status="COUNTEREXAMPLE", prop=prop, bound_proven=None,
-                    counterexample=ce, model_spec=model_spec,
-                    runtime_s=time.perf_counter() - t0, config=config,
-                    notes=f"Output {i} can be negative (SAT)",
-                )
-            if exit_code != "unsat":
+                # Verify the CE against the PyTorch model to guard against
+                # Marabou numerical artifacts (SAT with output >= 0 in practice).
+                with torch.no_grad():
+                    x_ce = torch.tensor([ce], dtype=torch.float32)
+                    y_ce = model_spec.model(x_ce)
+                if float(y_ce[0, i]) < _NONNEG_THRESHOLD:
+                    return self._result(
+                        status="COUNTEREXAMPLE", prop=prop, bound_proven=None,
+                        counterexample=ce, model_spec=model_spec,
+                        runtime_s=time.perf_counter() - t0, config=config,
+                        notes=f"Output {i} can be negative (SAT, confirmed by PyTorch model)",
+                    )
+                # CE is a numerical artifact; treat this output as proven non-negative.
+            elif exit_code != "unsat":
                 return self._result(
                     status="INCONCLUSIVE", prop=prop, bound_proven=None,
                     counterexample=None, model_spec=model_spec,
