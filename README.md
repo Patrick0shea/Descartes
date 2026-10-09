@@ -1,4 +1,4 @@
-# Formal Verification of Geometric Deep Learning for Scientific Simulation
+# Descartes: Formal Verification of Geometric Deep Learning for Scientific Simulation
 
 A simulator-agnostic framework for giving scientists provable, quantified
 worst-case guarantees about physical properties of ML simulators — over
