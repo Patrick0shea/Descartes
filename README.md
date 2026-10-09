@@ -1,8 +1,12 @@
-# Thesis: Formal Verification of Geometric Deep Learning for Scientific Simulation
+# Formal Verification of Geometric Deep Learning for Scientific Simulation
 
 A simulator-agnostic framework for giving scientists provable, quantified
 worst-case guarantees about physical properties of ML simulators — over
 the whole input space, not sampled inputs.
+
+This started as a research project exploring whether geometric inductive
+biases make neural scientific surrogates more amenable to formal
+verification; the results below are being written up as a paper.
 
 ---
 
